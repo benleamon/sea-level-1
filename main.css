@@ -1,0 +1,8 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+#mymap {
+	height: 600px;
+  background-color: gray; 
+}
