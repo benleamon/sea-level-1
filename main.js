@@ -1,6 +1,3 @@
-// Should there be a callback here?
-//var mymap = L.map('mymap').setView([34.663528, 135.370626], 10);
-// 37.379195, 137.840882 coordinates for japan-center
 var mymap =  L.map('mymap',{
   center: [34.648000, 135.411472],
   zoom: 10.5,
