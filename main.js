@@ -3,7 +3,8 @@ var mymap =  L.map('mymap',{
   zoom: 10.5,
 });
 
-var seaLevelRise = '2.0';
+//This is the variable to change the sealevel.
+var seaLevelRise = '1.0';
 
 //Sanchez code 1
 // Create the fragment shader as a multi-line string. Note the "`" character, valid only in ES6 JavaScript.
@@ -28,7 +29,7 @@ var antiTonerFragmentShader = `
   -100000.0;
 
   vec4 floodColour;
-  if (height > ${'seaLevelRise'}) {
+  if (height > ${seaLevelRise}) {
     // High (>10m) over ground, transparent
     floodColour = vec4(0.5, 0.5, 0.5, 0.0);
   } else if (height > 50.0) {
