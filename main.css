@@ -6,3 +6,6 @@ body {
 	height: 600px;
   background-color: gray;
 }
+li {
+  list-style-type: none;
+}
