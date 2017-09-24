@@ -4,7 +4,7 @@ var mymap =  L.map('mymap',{
 });
 
 //This is the variable to change the sealevel.
-var seaLevelRise = '1.0';
+var seaLevelRise = '10.0';
 
 //Sanchez code 1
 // Create the fragment shader as a multi-line string. Note the "`" character, valid only in ES6 JavaScript.
@@ -29,19 +29,35 @@ var antiTonerFragmentShader = `
   -100000.0;
 
   vec4 floodColour;
-  if (height > ${seaLevelRise}) {
+  // This is new code for styling the map.
+  if (${seaLevelRise === '0.0'}) {
+    floodColour = vec4(0.5, 0.5, 0.5, 0.0);
+  } else if (height > ${seaLevelRise}) {
     // High (>10m) over ground, transparent
     floodColour = vec4(0.5, 0.5, 0.5, 0.0);
-  } else if (height > 50.0) {
-    // Over ground but somewhat close to sea level, yellow
-    floodColour = vec4(0.9, 0.9, 0.5, 0.4);
   } else if (height > 0.0) {
-    // Over ground but very close to sea level, red
-    floodColour = vec4(0.9, 0.5, 0.5, 0.4);
+    // Over ground but very close to sea level, blue
+    floodColour = vec4(0.05, 0.1, 0.9, 0.4);
   } else {
     // Water, some semiopaque blue
     floodColour = vec4(0.05, 0.1, 0.9, 0.4);
   }
+
+  //   // This is the original code for the sea level rise.
+  //   // Currently preserved in case we need it.
+  // if (height > ${seaLevelRise}) {
+  //   // High (>10m) over ground, transparent
+  //   floodColour = vec4(0.5, 0.5, 0.5, 0.0);
+  // } else if (height > 50.0) {
+  //   // Over ground but somewhat close to sea level, yellow
+  //   floodColour = vec4(0.9, 0.9, 0.5, 0.4);
+  // } else if (height > 0.0) {
+  //   // Over ground but very close to sea level, red
+  //   floodColour = vec4(0.9, 0.5, 0.5, 0.4);
+  // } else {
+  //   // Water, some semiopaque blue
+  //   floodColour = vec4(0.05, 0.1, 0.9, 0.4);
+  // }
 
   // Now fetch color from texture 0, which is the basemap
   texelColour = texture2D(uTexture0, vec2(vTextureCoords.s, vTextureCoords.t));
