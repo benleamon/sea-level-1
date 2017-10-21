@@ -7,3 +7,4 @@ Need to get the classes sorted.
 
 ## 9/24
 - the next step needs to be to try and figure out if the map is updatable. Is there a way to use leaflet to reset the flood coloring without having to reload the entire map? 
+- button added. Now to get the button to redraw the tiles we need redrawn. This will need JS connectivity, and the .redraw method from leaflet. 

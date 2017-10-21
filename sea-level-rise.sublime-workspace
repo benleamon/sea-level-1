@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"sea",
+				"seaLevelRise"
+			],
+			[
 				"list-style",
 				"list-style-type"
 			],
@@ -75,7 +79,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 951,
+				"buffer_size": 1142,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -93,16 +97,7 @@
 			"file": "main.js",
 			"settings":
 			{
-				"buffer_size": 3621,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "README.md",
-			"settings":
-			{
-				"buffer_size": 65,
+				"buffer_size": 7561,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -111,7 +106,7 @@
 			"file": "next-steps.md",
 			"settings":
 			{
-				"buffer_size": 177,
+				"buffer_size": 506,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -238,6 +233,8 @@
 	],
 	"file_history":
 	[
+		"/Users/benleamon/Documents/Infographics/Projects/sea-level-1/README.md",
+		"/Users/benleamon/Documents/Infographics/Projects/sea-level-1/next-steps.md",
 		"/Users/benleamon/Documents/Infographics/Projects/sea-level-1/sea-level-rise.sublime-project",
 		"/Users/benleamon/Documents/Infographics/Projects/tonkori-sim.js",
 		"/Users/benleamon/Desktop/random-card.js",
@@ -299,15 +296,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 951,
+						"buffer_size": 1142,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								951,
-								951
+								974,
+								974
 							]
 						],
 						"settings":
@@ -321,7 +318,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -360,27 +357,27 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3621,
+						"buffer_size": 7561,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2036,
-								2036
+								7559,
+								7559
 							]
 						],
 						"settings":
 						{
 							"color_scheme": "Packages/User/Color Highlighter/themes/Pacific Dark.tmTheme",
-							"git_gutter_is_enabled": false,
+							"git_gutter_is_enabled": true,
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 3.0,
-						"translation.y": 0.0,
+						"translation.x": 0.0,
+						"translation.y": 2137.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -388,56 +385,25 @@
 				},
 				{
 					"buffer": 3,
-					"file": "README.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 65,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								65,
-								65
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Pacific Dark.tmTheme",
-							"git_gutter_is_enabled": true,
-							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
 					"file": "next-steps.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 177,
+						"buffer_size": 506,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								176,
-								176
+								506,
+								506
 							]
 						],
 						"settings":
 						{
 							"color_scheme": "Packages/User/Color Highlighter/themes/Pacific Dark.tmTheme",
 							"git_gutter_is_enabled": true,
-							"open_with_edit": true,
 							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
 						},
 						"translation.x": 0.0,
