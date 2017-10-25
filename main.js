@@ -7,9 +7,10 @@ $(document).ready(() => {
 
   // //This is the variable to change the sealevel.
   var seaLevelRise = '100.0';
-
+  displayRise();
+  
   // Function to draw the map
-  function redraw(){
+  function drawMap(){
     var antiTonerFragmentShader = `
       void main(void) {
     // Fetch color from texture 2, which is the terrain-rgb tile
@@ -70,25 +71,54 @@ $(document).ready(() => {
       floodColour.rgb * (1.0 - texelColour.a) +
       texelColour.rgb * texelColour.a,
       1);
-  }
-  `
-  // Instantiate our L.TileLayer.GL...
-  var antitoner = L.tileLayer.gl({
-      // ... with the shader we just wrote above...
-      fragmentShader: antiTonerFragmentShader,
+    }
+    `
+    // Instantiate our L.TileLayer.GL...
+    var antitoner = L.tileLayer.gl({
+        // ... with the shader we just wrote above...
+        fragmentShader: antiTonerFragmentShader,
 
-      // ...and loading tile images from Stamen Toner as "uTexture0".
-      // If this array contained more than one tile template string,
-      // there would be "uTexture1", "uTexture2" and so on.
-      tileUrls: ['http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', 'http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', 'https://{s}.tiles.mapbox.com/v4/mapbox.terrain-rgb/{z}/{x}/{y}.pngraw?access_token=pk.eyJ1IjoiYmVuamFtaW5wYWxzYSIsImEiOiJjaWtqc2R6MjQwOGtidWRtNmVwY21jcDFiIn0.hJN_0BrRJTdB7KulNCEGaQ']
-  }).addTo(mymap);
+        // ...and loading tile images from Stamen Toner as "uTexture0".
+        // If this array contained more than one tile template string,
+        // there would be "uTexture1", "uTexture2" and so on.
+        tileUrls: ['http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', 'http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', 'https://{s}.tiles.mapbox.com/v4/mapbox.terrain-rgb/{z}/{x}/{y}.pngraw?access_token=pk.eyJ1IjoiYmVuamFtaW5wYWxzYSIsImEiOiJjaWtqc2R6MjQwOGtidWRtNmVwY21jcDFiIn0.hJN_0BrRJTdB7KulNCEGaQ']
+    }).addTo(mymap);
   };
 
-  redraw();
+  //Function to display the current sea level rise below the map
+  function displayRise(){
+    $('#sea-level-display').text(seaLevelRise);
+  };
+  //Draw the map
+  drawMap();
 
-  seaLevelRise = '1.0';
-
-  $('#refresh').on('click', () => {
-    redraw();
+  // Slider
+  $('#slider').slider({
+    max: 10,
+    min: 0,
+    step: .01,
   });
+  $('#slider').on('slidechange', function(){
+    //alert($('#slider').slider('value'));
+    seaLevelRise = ($('#slider').slider('value')*10);
+    displayRise();
+    drawMap();
+  })
+
+  // TEST CODE 
+  // seaLevelRise = '1.0';
+
+  // $('#refresh').on('click', () => {
+  //   drawMap();
+  // });
+  // TEST CODE END 
+
+  // Sidebar behavior
+  $('#sidebar-button').on('click', () => {
+    $('.sidebar').toggleClass('hidden');
+  });
+  $('.sidebar').on('mouseleave', () => {
+    $('.sidebar').toggleClass('hidden');
+  });
+
 });

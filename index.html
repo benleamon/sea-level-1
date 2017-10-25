@@ -8,6 +8,9 @@
 		crossorigin=""/>
 		<!-- jQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<!-- jQuery UI -->
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 		<!-- Leaflet JS Library -->
 		<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"
 		integrity="sha512-WXoSHqw/t26DszhdMhOXOkI7qCiv5QWXhH9R7CgvgZMHz1ImlkVQ3uNsiQKu5wwbbxtPzFXd1hK4tzno2VqhpA=="
@@ -18,18 +21,48 @@
 		<title>Sea Level Rise</title>
 	</head>
 	<body>
-		<nav>
-			<ul>
-				<li>Engilsh</li>
-				<li>日本語</li>
-			</ul>
-		</nav>
-		<div class="title">
-			<p>Projected Sea Level Rise in Japan</p>
+		<div class="container">
+			<!-- Open button for the sidebar -->
+			<div id="sidebar-button" class="bar-button"><span>O</span></div>
+		
+			<h1>Potential Effects of Sea Level Rise in Japan</h1>
+			
+			<!-- Sidebar -->
+			<div class = "sidebar hidden">
+				<div class="top-bar">
+					<ul class="language-options">
+						<li>Engilsh</li>
+						<li>日本語</li>
+					</ul>
+				<h2>See Prefectures</h2>
+					<ul>
+						<li>Osaka</li>
+						<li>Tokyo</li>
+						<li>Wakayama</li>
+					</ul>
+				<h2>See Cities</h2>
+					<ul>
+						<li>Nagoya</li>
+						<li>Osaka</li>
+						<li>Toyama</li>
+					</ul>
+				<h2>About</h2>
+				</div>
+			</div>
 		</div>
-		<div id="mymap">
+		<!-- Main container for graphics -->
+		<div  class = "container">
+			<div id="mymap">
+			</div>
+			<div id="person">
+			</div>
 		</div>
-		<button id = "refresh" name="refresh" onclick="redraw()">Redraw</button>
+		<div class ="container slider">
+			<div id="slider"></div>
+		</div>
+		<p id='sea-level-display'></p>
+		<button id = "refresh" name="refresh">Redraw</button>
+  
   <!-- My JS -->
   <script src="main.js" type="text/javascript" charset="utf-8" async defer></script>
 	</body>
