@@ -4,6 +4,46 @@
 		"selected_items":
 		[
 			[
+				"dis",
+				"displayRise"
+			],
+			[
+				"padd",
+				"padding"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"padding",
+				"padding-bottom"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"trans",
+				"transition"
+			],
+			[
+				"marg",
+				"margin-right"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"inlin",
+				"inline-block"
+			],
+			[
 				"sea",
 				"seaLevelRise"
 			],
@@ -79,16 +119,19 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 1142,
+				"buffer_size": 2218,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
+			"contents": "* {\n  margin: 0;\n  padding: 0;\n}\n\nh1{\n  margin-left: 0.1rem;\n}\n\nh2{\n  margin-left: 1rem;\n  margin-right: 2rem;\n}\n\nli {\n  list-style-type: none;\n}\n\n#mymap {\n  height: 600px;\n  background-color: gray;\n  width: 75%;\n  display: block;\n}\n\n#person {\n  height: 600px;\n  background-color: gray;\n  width: 25%;\n}\n\n#slider{\n  margin: .5rem;\n  width:  80%;\n}\n\n.container {\n  display: flex;\n}\n\n.bar-button{\n  z-index: 10001;\n  height: 50px;\n  width: 50px;\n  background-color: lightgrey;\n}\n\n.sidebar{\n  position: absolute;\n  display: flex;\n  width:  30%;\n  max-width: 40%;\n  height: 100%;\n  z-index: 10000;\n  background-color: lightgrey;\n  /* How do we get the transition thing working? */\n  transition: 5s;\n}\n\n.language-options{\n  position: relative;\n  left:  6rem;\n}\n\n.hidden{\n  display: none;\n}",
 			"file": "main.css",
+			"file_size": 816,
+			"file_write_time": 131538237790000000,
 			"settings":
 			{
-				"buffer_size": 118,
+				"buffer_size": 783,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -97,16 +140,7 @@
 			"file": "main.js",
 			"settings":
 			{
-				"buffer_size": 7561,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "next-steps.md",
-			"settings":
-			{
-				"buffer_size": 506,
+				"buffer_size": 4097,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -208,7 +242,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 448.0
+		"width": 413.0
 	},
 	"console":
 	{
@@ -229,12 +263,13 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/benleamon/Documents/Infographics/Projects/sea-level-1"
+		"/Users/benleamon/Documents/Infographics/Projects/sea-level-1",
+		"/Users/benleamon/Documents/Infographics/Projects/sea-level-1/Research"
 	],
 	"file_history":
 	[
-		"/Users/benleamon/Documents/Infographics/Projects/sea-level-1/README.md",
 		"/Users/benleamon/Documents/Infographics/Projects/sea-level-1/next-steps.md",
+		"/Users/benleamon/Documents/Infographics/Projects/sea-level-1/README.md",
 		"/Users/benleamon/Documents/Infographics/Projects/sea-level-1/sea-level-rise.sublime-project",
 		"/Users/benleamon/Documents/Infographics/Projects/tonkori-sim.js",
 		"/Users/benleamon/Desktop/random-card.js",
@@ -268,6 +303,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"draw_map",
+			"redraw",
 			"<<",
 			"sublime"
 		],
@@ -277,6 +314,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"drawMap",
+			"draw_map"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -287,7 +326,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -296,15 +335,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1142,
+						"buffer_size": 2218,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								974,
-								974
+								507,
+								507
 							]
 						],
 						"settings":
@@ -318,7 +357,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -327,28 +366,30 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 118,
+						"buffer_size": 783,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								118,
-								118
+								752,
+								716
 							]
 						],
 						"settings":
 						{
 							"color_scheme": "Packages/User/Color Highlighter/themes/Pacific Dark.tmTheme",
 							"git_gutter_is_enabled": true,
-							"syntax": "Packages/CSS3/CSS3.sublime-syntax"
+							"syntax": "Packages/CSS3/CSS3.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 217.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -357,15 +398,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7561,
+						"buffer_size": 4097,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7559,
-								7559
+								3485,
+								3485
 							]
 						],
 						"settings":
@@ -377,37 +418,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2137.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "next-steps.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 506,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								506,
-								506
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Pacific Dark.tmTheme",
-							"git_gutter_is_enabled": true,
-							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1087.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -448,6 +459,10 @@
 	},
 	"menu_visible": true,
 	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.mdpopups":
 	{
 		"height": 0.0
 	},

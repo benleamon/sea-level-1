@@ -1,12 +1,13 @@
 $(document).ready(() => {
+  // Initialize the map
   var mymap =  L.map('mymap',{
     center: [34.648000, 135.411472],
     zoom: 10.5,
     scrollWheelZoom: false,
   });
 
-  // //This is the variable to change the sealevel.
-  var seaLevelRise = '100.0';
+  //This is the variable to change the sealevel. Units are 10ths of a meter. 
+  var seaLevelRise = '0.0';
   displayRise();
   
   // Function to draw the map
@@ -103,7 +104,7 @@ $(document).ready(() => {
     seaLevelRise = ($('#slider').slider('value')*10);
     displayRise();
     drawMap();
-  })
+  });
 
   // TEST CODE 
   // seaLevelRise = '1.0';
@@ -120,5 +121,4 @@ $(document).ready(() => {
   $('.sidebar').on('mouseleave', () => {
     $('.sidebar').toggleClass('hidden');
   });
-
 });
