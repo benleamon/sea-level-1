@@ -4,6 +4,66 @@
 		"selected_items":
 		[
 			[
+				"marg",
+				"margin"
+			],
+			[
+				"de",
+				"debugMe"
+			],
+			[
+				"sea",
+				"seaLevel"
+			],
+			[
+				"se",
+				"section\tTag"
+			],
+			[
+				"dis",
+				"displayRise"
+			],
+			[
+				"padd",
+				"padding"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"padding",
+				"padding-bottom"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"trans",
+				"transition"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"inlin",
+				"inline-block"
+			],
+			[
+				"list-style",
+				"list-style-type"
+			],
+			[
+				"nav",
+				"nav\tTag"
+			],
+			[
 				"background",
 				"background-color"
 			],
@@ -67,7 +127,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 993,
+				"buffer_size": 2623,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -76,36 +136,16 @@
 			"file": "main.css",
 			"settings":
 			{
-				"buffer_size": 87,
+				"buffer_size": 881,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "Package Control Messages\n========================\n\nColor Highlighter\n-----------------\n\n  NEW VERSION AVAILABLE!\n  \n  Color Highlighter was developed for many years and features were added without consideration.\n  As a result it has plenty of bugs and code is completely unmaintainable.\n  Because of it, I've decided to rewrite the plugin from scratch using all the good programming practices I learned over the years.\n  \n  Right now the new version is still in the alpha stage, but it's very stable and just doesn't have several features of the current version.\n  If you want to help the development, please check out the announce here https://github.com/Monnoroch/ColorHighlighter/issues/366.\n  \n  The plugin is being developed by me alone in my spare time, so if you want to encourage me to build it better and faster, donations as always welcome (See https://github.com/Monnoroch/ColorHighlighter).\n  Thank you guys for your support, every little bit helps!\n",
-			"settings":
-			{
-				"buffer_size": 962,
-				"line_ending": "Unix",
-				"name": "Package Control Messages",
-				"read_only": true,
-				"scratch": true
 			}
 		},
 		{
 			"file": "main.js",
 			"settings":
 			{
-				"buffer_size": 2941,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "README.md",
-			"settings":
-			{
-				"buffer_size": 65,
+				"buffer_size": 4762,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -114,7 +154,7 @@
 			"file": "next-steps.md",
 			"settings":
 			{
-				"buffer_size": 177,
+				"buffer_size": 1362,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -216,7 +256,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 448.0
+		"width": 413.0
 	},
 	"console":
 	{
@@ -241,6 +281,8 @@
 	],
 	"file_history":
 	[
+		"/Users/benleamon/Documents/Infographics/Projects/sea-level-1/next-steps.md",
+		"/Users/benleamon/Documents/Infographics/Projects/sea-level-1/README.md",
 		"/Users/benleamon/Documents/Infographics/Projects/sea-level-1/sea-level-rise.sublime-project",
 		"/Users/benleamon/Documents/Infographics/Projects/tonkori-sim.js",
 		"/Users/benleamon/Desktop/random-card.js",
@@ -274,6 +316,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"map",
+			"draw_map",
+			"redraw",
 			"<<",
 			"sublime"
 		],
@@ -283,6 +328,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"drawMap",
+			"draw_map"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -293,7 +340,7 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -302,15 +349,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 993,
+						"buffer_size": 2623,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								993,
-								993
+								1440,
+								1440
 							]
 						],
 						"settings":
@@ -324,7 +371,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -333,78 +380,47 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 87,
+						"buffer_size": 881,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								87,
-								87
+								474,
+								448
 							]
 						],
 						"settings":
 						{
 							"color_scheme": "Packages/User/Color Highlighter/themes/Pacific Dark.tmTheme",
 							"git_gutter_is_enabled": true,
-							"syntax": "Packages/CSS3/CSS3.sublime-syntax"
+							"syntax": "Packages/CSS3/CSS3.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 106.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 962,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								962,
-								962
-							]
-						],
-						"settings":
-						{
-							"auto_indent": false,
-							"color_scheme": "Packages/User/Color Highlighter/themes/Pacific Dark.tmTheme",
-							"default_dir": "/Users/benleamon/Documents/Infographics/Projects/sea-level-1",
-							"git_gutter_is_enabled": false,
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_width": 2,
-							"word_wrap": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "main.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2941,
+						"buffer_size": 4762,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								129,
-								129
+								3974,
+								3974
 							]
 						],
 						"settings":
@@ -416,71 +432,39 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1441.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "README.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 65,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								65,
-								65
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Pacific Dark.tmTheme",
-							"git_gutter_is_enabled": true,
-							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
+					"buffer": 3,
 					"file": "next-steps.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 177,
+						"buffer_size": 1362,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								176,
-								176
+								13,
+								13
 							]
 						],
 						"settings":
 						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Pacific Dark.tmTheme",
 							"git_gutter_is_enabled": true,
-							"open_with_edit": true,
 							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -518,6 +502,10 @@
 	},
 	"menu_visible": true,
 	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.mdpopups":
 	{
 		"height": 0.0
 	},

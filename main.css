@@ -1,11 +1,71 @@
-body {
-	margin: 0;
-	padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
-#mymap {
-	height: 600px;
-  background-color: gray;
+
+h1{
+  margin-left: 0.1rem;
 }
+
 li {
   list-style-type: none;
+}
+
+#mymap {
+  height: 600px;
+  background-color: gray;
+  width: 75%;
+  /* display: block; */
+}
+
+#person {
+  height: 600px;
+  background-color: gray;
+  width: 25%;
+}
+
+#slider {
+  margin: .5rem;
+  width:  80%;
+}
+
+#dropdown {
+  justify-content: center;
+}
+
+#dropdown div {
+  display: block;
+}
+
+
+.container {
+  display: flex;
+}
+
+.bar-button{
+  z-index: 10001;
+  height: 50px;
+  width: 50px;
+  background-color: lightgrey;
+}
+
+.sidebar{
+  position: absolute;
+  max-width: 40%;
+  height: 100%;
+  z-index: 10000;
+  background-color: lightgrey;
+  /* How do we get the transition thing working? */
+  transition: 5s;}
+  .sidebar h2{
+  margin-right: 2rem;
+  margin-left: 1rem;}
+
+.language-options{
+  position: relative;
+  left:  6rem;
+}
+
+.hidden{
+  display: none;
 }

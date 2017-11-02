@@ -2,28 +2,89 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<!-- Leaflet CSS -->
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
 		integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
 		crossorigin=""/>
-		<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"
-		integrity="sha512-WXoSHqw/t26DszhdMhOXOkI7qCiv5QWXhH9R7CgvgZMHz1ImlkVQ3uNsiQKu5wwbbxtPzFXd1hK4tzno2VqhpA=="
-		crossorigin=""></script>
-		<script src='https://unpkg.com/leaflet.tilelayer.gl@latest/src/Leaflet.TileLayer.GL'></script>
+		<!-- jQuery UI -->
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+		<!-- My CSS -->
 		<link rel="stylesheet" type="text/css" href="main.css">
+		
 		<title>Sea Level Rise</title>
 	</head>
 	<body>
-		<nav>
-			<ul>
-				<li>Engilsh</li>
-				<li>日本語</li>
-			</ul>
-		</nav>
-		<div class="title">
-			<p>Projected Sea Level Rise in Japan</p>
+		<div class="container">
+			<!-- Open button for the sidebar -->
+			<div id="sidebar-button" class="bar-button"><span>O</span></div>
+		
+			<h1>Potential Effects of Sea Level Rise in Japan</h1>
+			
+			<!-- Sidebar -->
+			<div class = "sidebar hidden">
+				<div class="top-bar">
+					<ul class="language-options">
+						<li>Engilsh</li>
+						<li>日本語</li>
+					</ul>
+				<h2>See Prefectures</h2>
+					<ul>
+						<li>Osaka</li>
+						<li>Tokyo</li>
+						<li>Wakayama</li>
+					</ul>
+				<h2>See Cities</h2>
+					<ul>
+						<li>Nagoya</li>
+						<li>Osaka</li>
+						<li>Toyama</li>
+					</ul>
+				<h2>About</h2>
+				</div>
+			</div>
 		</div>
-		<div id="mymap">
+
+		<!-- Opening screen -->
+		<section class="container" id="dropdown">
+			<div>
+				<h2>What prefecture would you like to see?</h2>
+					<ul>
+						<li>Osaka</li>
+						<li>Tokyo</li>
+						<li>Wakayama</li>
+					</ul>
+			</div>
+		</section>
+
+		<!-- Main container for graphics -->
+		<div  class = "container">
+			<div id="mymap">
+			</div>
+			<div id="person">
+			</div>
 		</div>
-  <script src="main.js" type="text/javascript" charset="utf-8" async defer></script>
+		<div class ="container slider">
+			<div id="slider"></div>
+		</div>
+		<p id='sea-level-display'></p>
+		<button id = "refresh" name="refresh">Redraw</button>
+		<section class="debug">
+			<p id="dmap">Map Value:</p>
+			<p id="dcm">CM Value (slider input):</p>
+			<p id="dm">Meter value (display output):</p>
+		</section>
+  
+		<!-- jQuery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<!-- jQuery UI -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> 
+		<!-- Leaflet -->
+		<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"
+			integrity="sha512-WXoSHqw/t26DszhdMhOXOkI7qCiv5QWXhH9R7CgvgZMHz1ImlkVQ3uNsiQKu5wwbbxtPzFXd1hK4tzno2VqhpA=="
+			crossorigin=""></script>
+		<!-- Leaflet.Tilelayer.GL Leaflet plugin-->			
+		<script src='https://unpkg.com/leaflet.tilelayer.gl@latest/src/Leaflet.TileLayer.GL'></script>
+	  <!-- My JS -->
+	  <script src="main.js" type="text/javascript" charset="utf-8" async defer></script>
 	</body>
 </html>
