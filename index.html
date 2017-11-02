@@ -43,6 +43,19 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- Opening screen -->
+		<section class="container" id="dropdown">
+			<div>
+				<h2>What prefecture would you like to see?</h2>
+					<ul>
+						<li>Osaka</li>
+						<li>Tokyo</li>
+						<li>Wakayama</li>
+					</ul>
+			</div>
+		</section>
+
 		<!-- Main container for graphics -->
 		<div  class = "container">
 			<div id="mymap">
@@ -55,6 +68,11 @@
 		</div>
 		<p id='sea-level-display'></p>
 		<button id = "refresh" name="refresh">Redraw</button>
+		<section class="debug">
+			<p id="dmap">Map Value:</p>
+			<p id="dcm">CM Value (slider input):</p>
+			<p id="dm">Meter value (display output):</p>
+		</section>
   
 		<!-- jQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

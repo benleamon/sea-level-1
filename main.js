@@ -6,10 +6,38 @@ $(document).ready(() => {
     scrollWheelZoom: false,
   });
 
+  let seaLevel = {
+    _map: '0.0000000000',
+    _cm: 0,
+    _m: 0,
+
+    //Setter for _cm
+    set cm(newCm){
+      //Here we update all the other properties whenever seaLevel.Cm is changed.
+      this._cm = newCm;
+      this._m = (newCm/100);
+      this._map = (newCm/10).toFixed(10);
+    },
+
+    //Getters for all the properties
+    get map(){
+      return this._map;
+    },
+    get cm(){
+      return this._cm;
+    },
+    get m(){
+      return this._m;
+    },
+  };
+
   //This is the variable to change the sealevel. Units are 10ths of a meter. 
-  var seaLevelRise = '0.0';
-  displayRise();
+  //var seaLevelRise = '0.0';
+
   
+  //DELETE
+  //debugMe();
+
   // Function to draw the map
   function drawMap(){
     var antiTonerFragmentShader = `
@@ -26,9 +54,9 @@ $(document).ready(() => {
 
     vec4 floodColour;
     // This is new code for styling the map.
-    if (${seaLevelRise === '0.0'}) {
+    if (${seaLevel.map === '0.0000000000'}) {
       floodColour = vec4(0.5, 0.5, 0.5, 0.0);
-    } else if (height > ${seaLevelRise}) {
+    } else if (height > ${seaLevel.map}) {
       // High (>10m) over ground, transparent
       floodColour = vec4(0.5, 0.5, 0.5, 0.0);
     } else if (height > 0.0) {
@@ -41,7 +69,7 @@ $(document).ready(() => {
 
     //   // This is the original code for the sea level rise.
     //   // Currently preserved in case we need it.
-    // if (height > ${seaLevelRise}) {
+    // if (height > ${seaLevel.map}) {
     //   // High (>10m) over ground, transparent
     //   floodColour = vec4(0.5, 0.5, 0.5, 0.0);
     // } else if (height > 50.0) {
@@ -88,31 +116,35 @@ $(document).ready(() => {
 
   //Function to display the current sea level rise below the map
   function displayRise(){
-    $('#sea-level-display').text(seaLevelRise);
+    $('#sea-level-display').text(seaLevel.m);
   };
   //Draw the map
-  drawMap();
+ // drawMap();
 
+  //Show the rise.
+  displayRise();
+
+  //Display values in debug section
+  function debugMe() {
+    $('#dmap').text(`Map Value: ${seaLevel.map}`);
+    $('#dcm').text(`CM Value (slider input): ${seaLevel.cm}`);
+    $('#dm').text(`Meter value (display output): ${seaLevel.m}`)
+  };
+  debugMe();
+  
   // Slider
   $('#slider').slider({
-    max: 10,
+    max: 1000,
     min: 0,
-    step: .01,
+    step: 1,
   });
   $('#slider').on('slidechange', function(){
     //alert($('#slider').slider('value'));
-    seaLevelRise = ($('#slider').slider('value')*10);
+    seaLevel.cm = $('#slider').slider('value');
     displayRise();
     drawMap();
-  });
-
-  // TEST CODE 
-  // seaLevelRise = '1.0';
-
-  // $('#refresh').on('click', () => {
-  //   drawMap();
-  // });
-  // TEST CODE END 
+    debugMe();
+  }); 
 
   // Sidebar behavior
   $('#sidebar-button').on('click', () => {
