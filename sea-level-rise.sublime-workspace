@@ -127,7 +127,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 2623,
+				"buffer_size": 2776,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -136,7 +136,7 @@
 			"file": "main.css",
 			"settings":
 			{
-				"buffer_size": 881,
+				"buffer_size": 1011,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -154,7 +154,7 @@
 			"file": "next-steps.md",
 			"settings":
 			{
-				"buffer_size": 1362,
+				"buffer_size": 1422,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -340,7 +340,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -349,15 +349,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2623,
+						"buffer_size": 2776,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1440,
-								1440
+								1309,
+								1309
 							]
 						],
 						"settings":
@@ -368,10 +368,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 595.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -380,15 +380,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 881,
+						"buffer_size": 1011,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								474,
-								448
+								505,
+								505
 							]
 						],
 						"settings":
@@ -400,10 +400,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 106.0,
+						"translation.y": 348.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -432,10 +432,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1441.0,
+						"translation.y": 1567.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -444,15 +444,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1362,
+						"buffer_size": 1422,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								13,
-								13
+								1422,
+								1422
 							]
 						],
 						"settings":

@@ -19,3 +19,6 @@ Problem 1 fixed. Problem 2 remains.
 
 ## 11/1
 Problem 2 fixed. 
+
+## 11/2 
+Next step is getting the initial screen set up. 

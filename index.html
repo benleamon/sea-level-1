@@ -14,12 +14,11 @@
 		<title>Sea Level Rise</title>
 	</head>
 	<body>
-		<div class="container">
+		<div class="container top-bar">
 			<!-- Open button for the sidebar -->
-			<div id="sidebar-button" class="bar-button"><span>O</span></div>
-		
-			<h1>Potential Effects of Sea Level Rise in Japan</h1>
+			<div id="sidebar-button" class="sidebar-button"><span>O</span></div>
 			
+		
 			<!-- Sidebar -->
 			<div class = "sidebar hidden">
 				<div class="top-bar">
@@ -45,28 +44,38 @@
 		</div>
 
 		<!-- Opening screen -->
-		<section class="container" id="dropdown">
-			<div>
-				<h2>What prefecture would you like to see?</h2>
-					<ul>
-						<li>Osaka</li>
-						<li>Tokyo</li>
-						<li>Wakayama</li>
-					</ul>
+		<section>
+			<div class="background">  	<!-- This is the div we'll use for the background image -->
+			<div class="container dropdown">
+				<div class = "dropdown-content">
+					<div class="dropdown-header">
+						<h2>What prefecture would you like to see?</h2>
+						<div class="dropdown-button">O</div>
+					</div>
+				<ul class="dropdown-menu hidden">
+					<li>Osaka</li>
+					<li>Tokyo</li>
+					<li>Wakayama</li>
+				</ul>
+				</div>
 			</div>
+			</div>
+			<h2>Sea Level Rise</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi convallis gravida nunc, sed fermentum purus. Nulla sed maximus nulla. Donec est neque, iaculis eget placerat sit amet, tempus ac ex. Suspendisse sapien enim, faucibus quis ante nec, faucibus luctus eros. Proin sed erat et mi rutrum hendrerit. Mauris id enim ultricies, interdum augue sed, lacinia sem. Curabitur finibus, eros eu mattis laoreet, quam leo congue dolor, non dapibus mauris lectus vitae turpis. Pellentesque metus nulla, accumsan ac tortor ac, porttitor euismod dolor. Etiam sed leo justo. Donec congue velit quis dignissim feugiat. Morbi vel massa eget diam porta tempus nec quis ex. Integer sodales posuere mi sed feugiat. In justo nisi, tincidunt ac molestie id, tempor ut neque. Duis ultricies, neque ut porta auctor, est metus malesuada eros, sed fermentum leo libero eu quam. Praesent dui risus, luctus vel diam et, elementum mattis lorem. Sed ac commodo justo.</p>
+			<p>Sed quis augue nisl. Phasellus faucibus ex urna, eu fringilla eros hendrerit ut. Praesent non nisi tortor. Donec a lorem quis mi rhoncus rutrum eu vitae nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque in metus vitae lectus auctor rutrum. Nulla sed est dignissim, iaculis quam in, elementum massa. In nec blandit tortor, at scelerisque lacus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In pellentesque sapien et risus placerat varius vitae eu velit. Cras elementum sem eget eros scelerisque, vitae imperdiet nisi pretium. Sed ornare est vitae eros blandit, vitae pharetra leo tempor. Donec ac libero at sem pharetra efficitur id in ex. Cras nunc risus, feugiat vel ante nec, pulvinar hendrerit urna.</p>
 		</section>
 
 		<!-- Main container for graphics -->
 		<div  class = "container">
-			<div id="mymap">
+			<div class = "map" id="mymap">
 			</div>
-			<div id="person">
+			<div class ="person" id="person">
 			</div>
 		</div>
 		<div class ="container slider">
-			<div id="slider"></div>
+			<div class="slider" id="slider"></div>
 		</div>
-		<p id='sea-level-display'></p>
+		<p id="sea-level-display"></p>
 		<button id = "refresh" name="refresh">Redraw</button>
 		<section class="debug">
 			<p id="dmap">Map Value:</p>

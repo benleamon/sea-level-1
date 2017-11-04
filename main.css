@@ -11,38 +11,54 @@ li {
   list-style-type: none;
 }
 
-#mymap {
+.hidden{
+  display: none;
+}
+
+.container {
+  display: flex;
+}
+
+.background{
+  height: 35rem;
+  background-image: url('images/ocean1.jpg');
+}
+
+.map {
   height: 600px;
   background-color: gray;
   width: 75%;
   /* display: block; */
 }
 
-#person {
+.person {
   height: 600px;
   background-color: gray;
   width: 25%;
 }
 
-#slider {
+.slider {
   margin: .5rem;
   width:  80%;
 }
 
-#dropdown {
+.dropdown {
   justify-content: center;
 }
-
-#dropdown div {
+.dropdown-button{
+  background-color: lightgray;
+  height: 2rem;
+  width: 2rem;
+}
+.dropdown-content{
   display: block;
 }
-
-
-.container {
+.dropdown-header{
   display: flex;
 }
 
-.bar-button{
+.sidebar-button{
+  position: fixed;
   z-index: 10001;
   height: 50px;
   width: 50px;
@@ -50,7 +66,7 @@ li {
 }
 
 .sidebar{
-  position: absolute;
+  position: fixed;
   max-width: 40%;
   height: 100%;
   z-index: 10000;
@@ -64,8 +80,4 @@ li {
 .language-options{
   position: relative;
   left:  6rem;
-}
-
-.hidden{
-  display: none;
 }

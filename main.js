@@ -119,7 +119,7 @@ $(document).ready(() => {
     $('#sea-level-display').text(seaLevel.m);
   };
   //Draw the map
- // drawMap();
+  drawMap();
 
   //Show the rise.
   displayRise();
@@ -152,5 +152,10 @@ $(document).ready(() => {
   });
   $('.sidebar').on('mouseleave', () => {
     $('.sidebar').toggleClass('hidden');
+  });
+
+  // Dropdown behavior
+  $('.dropdown-button').on('click', () => {
+    $('.dropdown-menu').toggleClass('hidden');
   });
 });
