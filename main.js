@@ -1,10 +1,6 @@
 $(document).ready(() => {
-  // Initialize the map
-  var mymap =  L.map('mymap',{
-    center: [34.648000, 135.411472],
-    zoom: 10.5,
-    scrollWheelZoom: false,
-  });
+  // Initialize the map variable
+  var mymap = '';
 
   let seaLevel = {
     _map: '0.0000000000',
@@ -37,6 +33,17 @@ $(document).ready(() => {
   
   //DELETE
   //debugMe();
+
+  //Function to initialise the map
+  function mapinit(){
+      mymap = L.map('mymap',{
+    center: [34.648000, 135.411472],
+    zoom: 10.5,
+    scrollWheelZoom: false,
+    });
+  };
+
+
 
   // Function to draw the map
   function drawMap(){
@@ -119,7 +126,8 @@ $(document).ready(() => {
     $('#sea-level-display').text(seaLevel.m);
   };
   //Draw the map
-  drawMap();
+  //mapinit();
+  //drawMap();
 
   //Show the rise.
   displayRise();
@@ -148,14 +156,17 @@ $(document).ready(() => {
 
   // Sidebar behavior
   $('#sidebar-button').on('click', () => {
+    $(event.currentTarget).find('img').toggleClass('rotate');
     $('.sidebar').toggleClass('hidden');
   });
   $('.sidebar').on('mouseleave', () => {
     $('.sidebar').toggleClass('hidden');
+    $('.sidebar-button').find('img').toggleClass('rotate');
   });
 
   // Dropdown behavior
   $('.dropdown-button').on('click', () => {
     $('.dropdown-menu').toggleClass('hidden');
+    $(event.currentTarget).find('img').toggleClass('rotate');
   });
 });
