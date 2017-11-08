@@ -4,6 +4,62 @@
 		"selected_items":
 		[
 			[
+				"flex",
+				"flex-flow"
+			],
+			[
+				"content",
+				"align-content"
+			],
+			[
+				"paddi",
+				"padding"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"padding",
+				"padding-left"
+			],
+			[
+				"background",
+				"background-repeat"
+			],
+			[
+				"li",
+				"lightgray"
+			],
+			[
+				"current",
+				"currentTarget"
+			],
+			[
+				"trans",
+				"transform"
+			],
+			[
+				"side",
+				"sidebar-button"
+			],
+			[
+				"margin",
+				"margin"
+			],
+			[
+				"form",
+				"form\tTag"
+			],
+			[
+				"dark",
+				"darkgray"
+			],
+			[
+				"map",
+				"mapinit"
+			],
+			[
 				"marg",
 				"margin"
 			],
@@ -32,18 +88,6 @@
 				"margin"
 			],
 			[
-				"padding",
-				"padding-bottom"
-			],
-			[
-				"margin",
-				"margin-bottom"
-			],
-			[
-				"trans",
-				"transition"
-			],
-			[
 				"inline",
 				"inline-block"
 			],
@@ -62,10 +106,6 @@
 			[
 				"nav",
 				"nav\tTag"
-			],
-			[
-				"background",
-				"background-color"
 			],
 			[
 				"time",
@@ -108,10 +148,6 @@
 				"ol\tTag"
 			],
 			[
-				"li",
-				"li\tTag"
-			],
-			[
 				"p",
 				"p\tTag"
 			],
@@ -127,7 +163,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 2776,
+				"buffer_size": 5347,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -136,7 +172,7 @@
 			"file": "main.css",
 			"settings":
 			{
-				"buffer_size": 1011,
+				"buffer_size": 1771,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -145,7 +181,7 @@
 			"file": "main.js",
 			"settings":
 			{
-				"buffer_size": 4762,
+				"buffer_size": 5171,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -316,6 +352,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"p{\n  font-family: 'Noto Sans', sans-serif;\n}",
 			"map",
 			"draw_map",
 			"redraw",
@@ -340,7 +377,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -349,15 +386,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2776,
+						"buffer_size": 5347,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1309,
-								1309
+								1445,
+								1445
 							]
 						],
 						"settings":
@@ -368,10 +405,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 595.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -380,15 +417,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1011,
+						"buffer_size": 1771,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								505,
-								505
+								851,
+								851
 							]
 						],
 						"settings":
@@ -400,7 +437,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 348.0,
+						"translation.y": 684.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -412,15 +449,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4762,
+						"buffer_size": 5171,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3974,
-								3974
+								4066,
+								4066
 							]
 						],
 						"settings":
@@ -432,10 +469,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1567.0,
+						"translation.y": 1484.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{

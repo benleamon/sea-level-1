@@ -126,8 +126,8 @@ $(document).ready(() => {
     $('#sea-level-display').text(seaLevel.m);
   };
   //Draw the map
-  //mapinit();
-  //drawMap();
+  mapinit();
+  drawMap();
 
   //Show the rise.
   displayRise();
