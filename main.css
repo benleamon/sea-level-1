@@ -4,53 +4,98 @@
 }
 
 h1{
+  font-family: 'Noto Sans', sans-serif;
   margin-left: 0.1rem;
+}
+h2{
+  font-family: 'Noto Sans', sans-serif;
+}
+p{
+  font-family: 'Noto Sans', sans-serif;
 }
 
 li {
+  font-family: 'Noto Sans', sans-serif;
   list-style-type: none;
 }
 
-#mymap {
-  height: 600px;
-  background-color: gray;
-  width: 75%;
-  /* display: block; */
+input{
+  width: 100%;
 }
 
-#person {
-  height: 600px;
-  background-color: gray;
-  width: 25%;
+.hidden{
+  display: none;
 }
-
-#slider {
-  margin: .5rem;
-  width:  80%;
-}
-
-#dropdown {
-  justify-content: center;
-}
-
-#dropdown div {
-  display: block;
-}
-
 
 .container {
   display: flex;
 }
 
-.bar-button{
+.background{
+  height: 35rem;
+  background-image: url('images/ocean2.jpeg');
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: cover;
+
+}
+
+.map {
+  height: 600px;
+  background-color: darkgray;
+  width: 75%;
+  /* display: block; */
+}
+
+.person {
+  height: 600px;
+  background-color: gray;
+  width: 25%;
+}
+
+.slider {
+  margin: .5rem;
+  width:  80%;
+}
+
+.dropdown {
+  justify-content: center;
+  margin: 10rem 0rem;
+}
+  .dropdown input{
+    padding: .5rem .25rem;
+    outline: none;
+  }
+
+.dropdown-button{
+  background-color: lightgray;
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+}
+.dropdown-header{
+  display: flex;
+}
+
+.text{
+  margin: 1em 8em;
+}
+
+.sidebar-button{
+  position: fixed;
   z-index: 10001;
   height: 50px;
   width: 50px;
   background-color: lightgrey;
+  cursor: pointer;
+}
+.rotate{
+  transition: 0.1s;
+  transform: rotate(90deg);
 }
 
 .sidebar{
-  position: absolute;
+  position: fixed;
   max-width: 40%;
   height: 100%;
   z-index: 10000;
@@ -59,13 +104,19 @@ li {
   transition: 5s;}
   .sidebar h2{
   margin-right: 2rem;
-  margin-left: 1rem;}
+  margin-left: 1rem;
+  }
+  .sidebar input{
+    outline: none;
+    border: none;
+    background-color: lightgray;
+    background-image: url('images/search-icon.svg');
+    background-repeat: no-repeat;
+    padding-left: 1.25rem;
+    margin: 0px 10px;
+  }
 
 .language-options{
   position: relative;
   left:  6rem;
-}
-
-.hidden{
-  display: none;
 }
