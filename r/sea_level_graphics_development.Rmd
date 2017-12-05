@@ -36,3 +36,131 @@ Load libraries:
 library(tidyverse)
 ```
 
+OK, I've got the data imported. Let's try and make a basic graph. 
+
+```{r}
+p <- ggplot(data = edited_table_A2_cities, 
+            mapping = aes(x = pop_below_3_rise_level, 
+                          y = reorder(Urban_agglomeration, pop_below_3_rise_level)))
+p + geom_point(size = 0.3) + 
+  theme_minimal()
+```
+Not bad, we need to group by regions though. 
+
+```{r}
+p <- ggplot(data = edited_table_A2_cities, 
+            mapping = aes(x = pop_below_3_rise_level,
+                          y = reorder(Urban_agglomeration, pop_below_3_rise_level),
+                          color = Region))
+
+p + geom_point(size = 0.3)
+```
+
+Not what we need. 
+```{r}
+p <- ggplot(data = edited_table_A2_cities %>% arrange(Region, desc(pop_below_3_rise_level)) %>%
+              mutate(city = factor(Urban_agglomeration, levels = Urban_agglomeration)),
+            mapping = aes(x = city,
+                          y = pop_below_3_rise_level,
+                          fill = Region))
+
+p + geom_bar(stat = "identity") + 
+  theme_minimal()
+```
+
+OK! Thanks internet! (Answer found here: https://stackoverflow.com/questions/43877663/order-multiple-variables-in-ggplot2)
+
+Things that need to be updated: 
+- Region grouping: Let's combine several of the regions. All of Europe can be together, as can all of Africa. Central America, South America, and the Carribean can also likely be grouped. 
+- We should also label the most-affected city per group, and the Japanese cities.
+- Let's reorer the groups. 
+
+```{r}
+p <- ggplot(data = edited_table_A2_cities %>% arrange(Region, desc(pop_below_3_rise_level)) %>%
+              mutate(city = factor(Urban_agglomeration, levels = Urban_agglomeration)),
+            mapping = aes(x = city,
+                          y = pop_below_3_rise_level,
+                          fill = Region))
+
+p + geom_bar(stat = "identity") + 
+  theme_minimal()
+```
+
+
+Ok. Looks like there might be another way to do this with something called forcats in the tidyverse libarary. Let's give it a go. 
+
+```{r}
+library(tidyverse)
+library(forcats)
+library(dplyr)
+
+edited_table_A2_cities %>%
+  mutate(ordering = -as.numeric(Region) + pop_below_3_rise_level, 
+         city = fct_reorder(Urban_agglomeration, ordering, .desc = T)) %>% ggplot(aes(city, pop_below_3_rise_level, fill = Region)) + geom_col()
+
+
+```
+
+OK really not what I want. Copy and paste, subbign my data: 
+```{r}
+require(dplyr)
+require(forcats)
+
+edited_table_A2_cities %>% 
+  mutate(ordering = -as.numeric(Region) + pop_below_3_rise_level,
+         city = fct_reorder(Urban_agglomeration, ordering, .desc = T)) %>% 
+  ggplot(aes(x = city, y = pop_below_3_rise_level, fill = Region)) + geom_col()
+```
+Not what we want. 
+```{r}
+library(tidyverse)
+p <- ggplot(data = edited_table_A2_cities,
+            mapping = aes(x = Urban_agglomeration,
+                        y = pop_below_3_rise_level))
+p + geom_bar(stat = "identity") + 
+  facet_wrap(~ Region, ncol = 18)
+```
+Also not what we want. 
+
+Table summarizing the number of observations per region: 
+```{r}
+cities_by_region <- edited_table_A2_cities %>%
+  group_by(Region) %>%
+  summarize(N = n())
+
+p <- ggplot(data = cities_by_region, 
+            mapping = aes(x = reorder(Region, N),
+                          y = N))
+p + geom_bar(stat= "identity") + 
+  coord_flip()+ 
+  labs(title = "Number of Cities in Dataset per region")
+```
+
+Lets go back to the original plot: 
+```{r}
+# First we'll make a new table.
+new_cities <- edited_table_A2_cities %>%
+  # Sort by region, and then by descending population.  
+  arrange(Region, desc(pop_below_3_rise_level)) %>%
+  # Convert Urban_agglomeration to a factor, with the sorted ordering of the levels. 
+  mutate(city = factor(Urban_agglomeration, levels = Urban_agglomeration))
+
+p <- ggplot(data = new_cities,
+            mapping = aes(x = city,
+                          y = pop_below_3_rise_level))
+
+p + geom_bar(stat = "identity") + 
+  facet_wrap(~ Region, scales="free_x",ncol = 18, strip.position = "bottom") +
+  theme_minimal() +
+  labs(x = "Regions",
+       y = "Pop displaced(?) by 3º Sea Level Rise") +
+  theme(axis.text.x = element_blank())
+  
+```
+
+Next steps: 
+- Delete most of the labeling 
+- standardize the bar spacing
+- make the width of the facets variable
+- regroup the facets (combine all of Europe, ect)
+- reorder the facets 
