@@ -157,10 +157,166 @@ p + geom_bar(stat = "identity") +
   theme(axis.text.x = element_blank())
   
 ```
+Examples relating to reordering (from https://trinkerrstuff.wordpress.com/2012/10/15/how-do-i-re-arrange-ordering-a-plot/)
+```{r}
+ggplot(data=mtcars, aes(y=as.factor(carb), x=mpg, colour=hp)) +
+    geom_point()
+```
 
-Next steps: 
-- Delete most of the labeling 
-- standardize the bar spacing
-- make the width of the facets variable
-- regroup the facets (combine all of Europe, ect)
-- reorder the facets 
+```{r}
+mtcars$carb2 <- factor(mtcars$carb, levels=rev(levels(factor(mtcars$carb))))
+ 
+ggplot(data=mtcars, aes(y=carb2, x=mpg, colour=hp)) +
+    geom_point()
+```
+
+```{r}
+ggplot(data=mtcars, aes(y=carb2, x=mpg, colour=hp)) +
+    geom_point() + facet_grid(cyl~.)
+```
+
+```{r}
+mtcars$cyl2 <- factor(mtcars$cyl, levels=c("6", "4", "8"))
+ggplot(data=mtcars, aes(y=carb2, x=mpg, colour=hp)) +
+    geom_point() + facet_grid(cyl2~.)
+```
+
+```{r}
+library(dplyr)
+
+# Data munging: Let's combine several of the region categories. 
+ new_cities <- edited_table_A2_cities %>%
+  mutate(big_region = recode(edited_table_A2_cities$Region, 
+                             # Asia Group
+                             "Eastern Asia" = "Asia", "South-Eastern Asia" = "Asia", "Southern Asia" = "Asia",
+                             # Africa Group
+                             "Western Africa" = "Africa", "South Africa" = "Africa", "Northern Africa"  = "Africa", "Middle Africa"  = "Africa", "Eastern Africa" = "Africa",
+                             # Europe Group
+                             "Northern Europe" = "Europe", "Western Europe" = "Europe", "Southern Europe" = "Europe", "Eastern Europe" = "Europe",
+                             #South, Central America and Caribbean Group
+                             "Central America" = "Central and South America and the Caribbean", "South America"= "Central and South America and the Caribbean", "Caribbean"= "Central and South America and the Caribbean",
+                             # North America Group
+                             "Northern America" = "North America",
+                             # Middle East Group
+                             "Western Asia" = "Middle East"
+                             )) # TK maybe just put a pipe operator here and change some of the variable names below?
+
+# First we'll make a new table.
+new_cities2 <- edited_table_A2_cities %>%
+  # Sort by region, and then by descending population.  
+  arrange(Region, desc(pop_below_3_rise_level)) %>%
+  # Convert Urban_agglomeration to a factor, with the sorted ordering of the levels. 
+  mutate(city = factor(Urban_agglomeration, levels = Urban_agglomeration))
+
+# Let's make region in new_citeis a factor with levels. If you want to edit the order of the facets, you can edit the order of these factors. Detailed process instructions can be found here: https://trinkerrstuff.wordpress.com/2012/10/15/how-do-i-re-arrange-ordering-a-plot/ 
+new_cities2$Region2 <- factor(new_cities2$Region, levels = c("Eastern Asia", "Caribbean", "Central America", "Eastern Africa", "Eastern Europe", "Middle Africa", "Northern Africa", "Northern America", "Northern Europe", "Oceania", "South Africa", "South America", "South-Eastern Asia", "Southern Asia", "Southern Europe", "Western Africa", "Western Asia", "Western Europe"))
+
+p <- ggplot(data = new_cities2,
+            mapping = aes(x = city,
+                          y = pop_below_3_rise_level))
+
+p + geom_bar(stat = "identity") + 
+  facet_wrap(~ Region2, labeller = label_wrap_gen(width = .5), scales="free_x",ncol = 18, strip.position = "bottom") +
+  theme_minimal() +
+  labs(x = "Regions",
+       y = "Pop displaced(?) by 3º Sea Level Rise") +
+  theme(axis.text.x = element_blank())
+```
+Hook the charts together! Version 2 (or 3 or whatever)
+
+```{r}
+library(dplyr)
+
+# Data munging: Let's combine several of the region categories. 
+ new_cities <- edited_table_A2_cities %>%
+  mutate(big_region = recode(edited_table_A2_cities$Region, 
+                             # Asia Group
+                             "Eastern Asia" = "Asia", "South-Eastern Asia" = "Asia", "Southern Asia" = "Asia",
+                             # Africa Group
+                             "Western Africa" = "Africa", "South Africa" = "Africa", "Northern Africa"  = "Africa", "Middle Africa"  = "Africa", "Eastern Africa" = "Africa",
+                             # Europe Group
+                             "Northern Europe" = "Europe", "Western Europe" = "Europe", "Southern Europe" = "Europe", "Eastern Europe" = "Europe",
+                             #South, Central America and Caribbean Group
+                             "Central America" = "Central and South America and the Caribbean", "South America"= "Central and South America and the Caribbean", "Caribbean"= "Central and South America and the Caribbean",
+                             # North America Group
+                             "Northern America" = "North America",
+                             # Middle East Group
+                             "Western Asia" = "Middle East")) %>%
+# First we'll make a new table.
+#new_cities2 <- edited_table_A2_cities %>%
+  # Sort by region, and then by descending population.  
+  arrange(big_region, desc(pop_below_3_rise_level)) %>%
+  # Convert Urban_agglomeration to a factor, with the sorted ordering of the levels. 
+  mutate(city = factor(Urban_agglomeration, levels = Urban_agglomeration))
+
+# Let's make region in new_citeis a factor with levels. If you want to edit the order of the facets, you can edit the order of these factors. Detailed process instructions can be found here: https://trinkerrstuff.wordpress.com/2012/10/15/how-do-i-re-arrange-ordering-a-plot/ 
+new_cities$big_region2 <- factor(new_cities$big_region, levels = c("Asia", "Africa", "Central and South America and the Caribbean", "Europe", "Middle East", "North America", "Oceania"))
+
+p <- ggplot(data = new_cities,
+            mapping = aes(x = city,
+                          y = pop_below_3_rise_level))
+
+p + geom_bar(stat = "identity") + 
+  facet_wrap(~ big_region2, labeller = label_wrap_gen(width = .5), scales="free_x",ncol = 18, strip.position = "bottom") +
+  theme_minimal() +
+  labs(x = "Regions",
+       y = "Pop displaced(?) by 3º Sea Level Rise") +
+  theme(axis.text.x = element_blank())
+```
+
+Ideally, I'd like to organize the order of the plots by the number of observations. Let's try and get that to work.
+
+```{r}
+cities_by_big_region <- new_cities %>%
+  group_by(big_region) %>%
+  summarize(N = n())
+
+p <- ggplot(data = cities_by_big_region, 
+            mapping = aes(x = reorder(big_region, N),
+                          y = N))
+p + geom_bar(stat= "identity") + 
+  coord_flip()+ 
+  labs(title = "Number of Cities in Dataset per region")
+```
+
+I don't think it's gonna be worth doing this programatically. Manual order ensues. 
+
+```{r}
+library(dplyr)
+
+# Data munging: Let's combine several of the region categories. 
+ new_cities <- edited_table_A2_cities %>%
+  mutate(big_region = recode(edited_table_A2_cities$Region, 
+                             # Asia Group
+                             "Eastern Asia" = "Asia", "South-Eastern Asia" = "Asia", "Southern Asia" = "Asia",
+                             # Africa Group
+                             "Western Africa" = "Africa", "South Africa" = "Africa", "Northern Africa"  = "Africa", "Middle Africa"  = "Africa", "Eastern Africa" = "Africa",
+                             # Europe Group
+                             "Northern Europe" = "Europe", "Western Europe" = "Europe", "Southern Europe" = "Europe", "Eastern Europe" = "Europe",
+                             #South, Central America and Caribbean Group
+                             "Central America" = "Central and South America and the Caribbean", "South America"= "Central and South America and the Caribbean", "Caribbean"= "Central and South America and the Caribbean",
+                             # North America Group
+                             "Northern America" = "North America",
+                             # Middle East Group
+                             "Western Asia" = "Middle East")) %>%
+# First we'll make a new table.
+#new_cities2 <- edited_table_A2_cities %>%
+  # Sort by region, and then by descending population.  
+  arrange(big_region, desc(pop_below_3_rise_level)) %>%
+  # Convert Urban_agglomeration to a factor, with the sorted ordering of the levels. 
+  mutate(city = factor(Urban_agglomeration, levels = Urban_agglomeration))
+
+# Let's make region in new_citeis a factor with levels. If you want to edit the order of the facets, you can edit the order of these factors. Detailed process instructions can be found here: https://trinkerrstuff.wordpress.com/2012/10/15/how-do-i-re-arrange-ordering-a-plot/ 
+new_cities$big_region2 <- factor(new_cities$big_region, levels = c("Asia", "Africa", "Central and South America and the Caribbean", "Europe", "North America", "Middle East", "Oceania"))
+
+p <- ggplot(data = new_cities,
+            mapping = aes(x = city,
+                          y = pop_below_3_rise_level))
+
+p + geom_bar(stat = "identity") + 
+  facet_wrap(~ big_region2, labeller = label_wrap_gen(width = .5), scales="free_x",ncol = 18, strip.position = "bottom") +
+  theme_minimal() +
+  labs(x = "Regions",
+       y = "Pop displaced(?) by 3º Sea Level Rise") +
+  theme(axis.text.x = element_blank())
+```
