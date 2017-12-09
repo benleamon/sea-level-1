@@ -282,9 +282,95 @@ p + geom_bar(stat= "identity") +
 I don't think it's gonna be worth doing this programatically. Manual order ensues. 
 
 ```{r}
+# Libraries
 library(dplyr)
+library(ggrepel)
 
-# Data munging: Let's combine several of the region categories. 
+# Color Palette: 
+japan.and.world.palette <- c("#e41a1c", "#377eb8")
+
+# Make a new table
+ new_cities <- edited_table_A2_cities %>%
+  #Combine several of the region categories. 
+  mutate(big_region = recode(edited_table_A2_cities$Region, 
+                             # Asia Group
+                             "Eastern Asia" = "Asia", "South-Eastern Asia" = "Asia", "Southern Asia" = "Asia",
+                             # Africa Group
+                             "Western Africa" = "Africa", "South Africa" = "Africa", "Northern Africa"  = "Africa", "Middle Africa"  = "Africa", "Eastern Africa" = "Africa",
+                             # Europe Group
+                             "Northern Europe" = "Europe", "Western Europe" = "Europe", "Southern Europe" = "Europe", "Eastern Europe" = "Europe",
+                             #South, Central America and Caribbean Group
+                             "Central America" = "Central and South America and the Caribbean", "South America"= "Central and South America and the Caribbean", "Caribbean"= "Central and South America and the Caribbean",
+                             # North America Group
+                             "Northern America" = "North America",
+                             # Middle East Group
+                             "Western Asia" = "Middle East")) %>%
+  # Sort by region, and then by descending population.  
+  arrange(big_region, desc(pop_below_3_rise_level)) %>%
+  # Convert Urban_agglomeration to a factor, with the sorted ordering of the levels. 
+  mutate(city = factor(Urban_agglomeration, levels = Urban_agglomeration))
+
+# Let's make region in new_citeis a factor with levels. If you want to edit the order of the facets, you can edit the order of these factors. Detailed process instructions can be found here: https://trinkerrstuff.wordpress.com/2012/10/15/how-do-i-re-arrange-ordering-a-plot/ 
+new_cities$big_region2 <- factor(new_cities$big_region, levels = c("Asia", "Africa", "Central and South America and the Caribbean", "Europe", "North America", "Middle East", "Oceania"))
+
+# Basic plot
+p0 <- ggplot(data = new_cities,
+            mapping = aes(x = city,
+                          y = pop_below_3_rise_level))
+
+# Add the bar chart and facets
+p1 <- p0 + geom_bar(stat = "identity") + 
+  facet_wrap(~ big_region2, labeller = label_wrap_gen(width = .5), scales="free_x",ncol = 18, strip.position = "bottom")
+
+# Labeling and theming
+p2 <- p1 +geom_text_repel(data = subset(new_cities, Country %in% "Japan" | pop_below_3_rise_level == max(pop_below_3_rise_level)),
+                  mapping = aes(label = Urban_agglomeration)) +
+  theme_minimal() +
+  labs(x = "Regions",
+       y = "Pop displaced(?) by 3º Sea Level Rise") +
+  theme(axis.text.x = element_blank())
+
+p2
+```
+
+Current goals: coloring japan, labeling Japanese cities and outliers
+
+
+
+Let's try to make a table of just the max values for each group: 
+```{r}
+# Gives you the number
+p <- max(new_cities$pop_below_3_rise_level)
+#gives you the full row. 
+p1 <- subset(new_cities, pop_below_3_rise_level == max(new_cities$pop_below_3_rise_level))
+
+a <-  subset(new_cities, big_region %in% "Asia")
+a2 <- new_cities %>% select(pop_below_3_rise_level) %>% max()
+
+a3 <- subset(new_cities, big_region %in% "Oceania") %>% select(pop_below_3_rise_level) %>% max()
+
+a2
+
+p
+
+a3
+```
+```{r}
+b <- new_cities %>% max(group_by(big_region), pop_below_3_rise_level)
+b
+```
+
+```{r}
+# Libraries
+require(tidyverse)
+require(dplyr)
+require(ggrepel)
+
+# Color Palette: 
+japan.and.world.palette <- c("#377eb8", "#e41a1c")
+
+# Create the table: 
+# First, let's combine several of the region categories. 
  new_cities <- edited_table_A2_cities %>%
   mutate(big_region = recode(edited_table_A2_cities$Region, 
                              # Asia Group
@@ -299,24 +385,41 @@ library(dplyr)
                              "Northern America" = "North America",
                              # Middle East Group
                              "Western Asia" = "Middle East")) %>%
-# First we'll make a new table.
-#new_cities2 <- edited_table_A2_cities %>%
+  # Add a highlight category
+  mutate(is_japan = case_when(Country == "Japan" ~ TRUE,
+                              TRUE ~ FALSE)) %>% 
   # Sort by region, and then by descending population.  
   arrange(big_region, desc(pop_below_3_rise_level)) %>%
   # Convert Urban_agglomeration to a factor, with the sorted ordering of the levels. 
   mutate(city = factor(Urban_agglomeration, levels = Urban_agglomeration))
 
-# Let's make region in new_citeis a factor with levels. If you want to edit the order of the facets, you can edit the order of these factors. Detailed process instructions can be found here: https://trinkerrstuff.wordpress.com/2012/10/15/how-do-i-re-arrange-ordering-a-plot/ 
+# Reorder the facets
+ # Let's make region in new_citeis a factor with levels. If you want to edit the order of the facets, you can edit the order of these factors. Detailed process instructions can be found here: https://trinkerrstuff.wordpress.com/2012/10/15/how-do-i-re-arrange-ordering-a-plot/ 
 new_cities$big_region2 <- factor(new_cities$big_region, levels = c("Asia", "Africa", "Central and South America and the Caribbean", "Europe", "North America", "Middle East", "Oceania"))
 
-p <- ggplot(data = new_cities,
+p0 <- ggplot(data = new_cities,
             mapping = aes(x = city,
-                          y = pop_below_3_rise_level))
+                          y = pop_below_3_rise_level,
+                          fill = is_japan))
 
-p + geom_bar(stat = "identity") + 
-  facet_wrap(~ big_region2, labeller = label_wrap_gen(width = .5), scales="free_x",ncol = 18, strip.position = "bottom") +
-  theme_minimal() +
+# Make the basic plot
+p1 <- p0 + geom_bar(position = "dodge", stat = "identity", width = 1) + 
+  facet_grid(~ big_region2, labeller = label_wrap_gen(width = .5), scales="free_x", space = "free_x", switch = "x")
+# When we were using facet wrap we had these  #, ncol = 7, strip.position = "bottom"
+
+# Labeling
+p2 <- p1 + geom_text_repel(data = subset(new_cities, Country %in% "Japan" | pop_below_3_rise_level == max(pop_below_3_rise_level)),
+                  mapping = aes(label = Urban_agglomeration))
+
+# Coloring 
+p3 <- p2 + scale_fill_manual(values = japan.and.world.palette)
+
+# Theming
+p4 <- p3 + theme_minimal() +
   labs(x = "Regions",
        y = "Pop displaced(?) by 3º Sea Level Rise") +
+  theme(panel.spacing.x = unit(-0.1, "native")) +
   theme(axis.text.x = element_blank())
+
+p4
 ```
