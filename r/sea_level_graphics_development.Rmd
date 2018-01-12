@@ -28,11 +28,640 @@ plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+# Import Data from Excel: 
+```{r}
+#library(readxl)
+#edited_table_A2_cities <- read_excel("Documents/Infographics/Projects/sea-level-1/r/data/edited table A2 cities.xlsx", 
+#    sheet = "Table A2 cities download edited")
+#View(edited_table_A2_cities)
+```
 
 
-# Let's go
+# Population affected in Cities by region, globally 
 Load libraries: 
 ```{r}
 library(tidyverse)
 ```
+
+OK, I've got the data imported. Let's try and make a basic graph. 
+
+```{r}
+p <- ggplot(data = edited_table_A2_cities, 
+            mapping = aes(x = pop_below_3_rise_level, 
+                          y = reorder(Urban_agglomeration, pop_below_3_rise_level)))
+p + geom_point(size = 0.3) + 
+  theme_minimal()
+```
+Not bad, we need to group by regions though. 
+
+```{r}
+p <- ggplot(data = edited_table_A2_cities, 
+            mapping = aes(x = pop_below_3_rise_level,
+                          y = reorder(Urban_agglomeration, pop_below_3_rise_level),
+                          color = Region))
+
+p + geom_point(size = 0.3)
+```
+
+Not what we need. 
+```{r}
+p <- ggplot(data = edited_table_A2_cities %>% arrange(Region, desc(pop_below_3_rise_level)) %>%
+              mutate(city = factor(Urban_agglomeration, levels = Urban_agglomeration)),
+            mapping = aes(x = city,
+                          y = pop_below_3_rise_level,
+                          fill = Region))
+
+p + geom_bar(stat = "identity") + 
+  theme_minimal()
+```
+
+OK! Thanks internet! (Answer found here: https://stackoverflow.com/questions/43877663/order-multiple-variables-in-ggplot2)
+
+Things that need to be updated: 
+- Region grouping: Let's combine several of the regions. All of Europe can be together, as can all of Africa. Central America, South America, and the Carribean can also likely be grouped. 
+- We should also label the most-affected city per group, and the Japanese cities.
+- Let's reorer the groups. 
+
+```{r}
+p <- ggplot(data = edited_table_A2_cities %>% arrange(Region, desc(pop_below_3_rise_level)) %>%
+              mutate(city = factor(Urban_agglomeration, levels = Urban_agglomeration)),
+            mapping = aes(x = city,
+                          y = pop_below_3_rise_level,
+                          fill = Region))
+
+p + geom_bar(stat = "identity") + 
+  theme_minimal()
+```
+
+
+Ok. Looks like there might be another way to do this with something called forcats in the tidyverse libarary. Let's give it a go. 
+
+```{r}
+library(tidyverse)
+library(forcats)
+library(dplyr)
+
+edited_table_A2_cities %>%
+  mutate(ordering = -as.numeric(Region) + pop_below_3_rise_level, 
+         city = fct_reorder(Urban_agglomeration, ordering, .desc = T)) %>% ggplot(aes(city, pop_below_3_rise_level, fill = Region)) + geom_col()
+
+
+```
+
+OK really not what I want. Copy and paste, subbign my data: 
+```{r}
+require(dplyr)
+require(forcats)
+
+edited_table_A2_cities %>% 
+  mutate(ordering = -as.numeric(Region) + pop_below_3_rise_level,
+         city = fct_reorder(Urban_agglomeration, ordering, .desc = T)) %>% 
+  ggplot(aes(x = city, y = pop_below_3_rise_level, fill = Region)) + geom_col()
+```
+Not what we want. 
+```{r}
+library(tidyverse)
+p <- ggplot(data = edited_table_A2_cities,
+            mapping = aes(x = Urban_agglomeration,
+                        y = pop_below_3_rise_level))
+p + geom_bar(stat = "identity") + 
+  facet_wrap(~ Region, ncol = 18)
+```
+Also not what we want. 
+
+Table summarizing the number of observations per region: 
+```{r}
+cities_by_region <- edited_table_A2_cities %>%
+  group_by(Region) %>%
+  summarize(N = n())
+
+p <- ggplot(data = cities_by_region, 
+            mapping = aes(x = reorder(Region, N),
+                          y = N))
+p + geom_bar(stat= "identity") + 
+  coord_flip()+ 
+  labs(title = "Number of Cities in Dataset per region")
+```
+
+Lets go back to the original plot: 
+```{r}
+# First we'll make a new table.
+new_cities <- edited_table_A2_cities %>%
+  # Sort by region, and then by descending population.  
+  arrange(Region, desc(pop_below_3_rise_level)) %>%
+  # Convert Urban_agglomeration to a factor, with the sorted ordering of the levels. 
+  mutate(city = factor(Urban_agglomeration, levels = Urban_agglomeration))
+
+p <- ggplot(data = new_cities,
+            mapping = aes(x = city,
+                          y = pop_below_3_rise_level))
+
+p + geom_bar(stat = "identity") + 
+  facet_wrap(~ Region, scales="free_x",ncol = 18, strip.position = "bottom") +
+  theme_minimal() +
+  labs(x = "Regions",
+       y = "Pop displaced(?) by 3º Sea Level Rise") +
+  theme(axis.text.x = element_blank())
+  
+```
+Examples relating to reordering (from https://trinkerrstuff.wordpress.com/2012/10/15/how-do-i-re-arrange-ordering-a-plot/)
+```{r}
+ggplot(data=mtcars, aes(y=as.factor(carb), x=mpg, colour=hp)) +
+    geom_point()
+```
+
+```{r}
+mtcars$carb2 <- factor(mtcars$carb, levels=rev(levels(factor(mtcars$carb))))
+ 
+ggplot(data=mtcars, aes(y=carb2, x=mpg, colour=hp)) +
+    geom_point()
+```
+
+```{r}
+ggplot(data=mtcars, aes(y=carb2, x=mpg, colour=hp)) +
+    geom_point() + facet_grid(cyl~.)
+```
+
+```{r}
+mtcars$cyl2 <- factor(mtcars$cyl, levels=c("6", "4", "8"))
+ggplot(data=mtcars, aes(y=carb2, x=mpg, colour=hp)) +
+    geom_point() + facet_grid(cyl2~.)
+```
+
+```{r}
+library(dplyr)
+
+# Data munging: Let's combine several of the region categories. 
+ new_cities <- edited_table_A2_cities %>%
+  mutate(big_region = recode(edited_table_A2_cities$Region, 
+                             # Asia Group
+                             "Eastern Asia" = "Asia", "South-Eastern Asia" = "Asia", "Southern Asia" = "Asia",
+                             # Africa Group
+                             "Western Africa" = "Africa", "South Africa" = "Africa", "Northern Africa"  = "Africa", "Middle Africa"  = "Africa", "Eastern Africa" = "Africa",
+                             # Europe Group
+                             "Northern Europe" = "Europe", "Western Europe" = "Europe", "Southern Europe" = "Europe", "Eastern Europe" = "Europe",
+                             #South, Central America and Caribbean Group
+                             "Central America" = "Central and South America, Caribbean", "South America"= "Central and South America, Caribbean", "Caribbean"= "Central and South America, Caribbean",
+                             # North America Group
+                             "Northern America" = "North America",
+                             # Middle East Group
+                             "Western Asia" = "Middle East"
+                             )) # TK maybe just put a pipe operator here and change some of the variable names below?
+
+# First we'll make a new table.
+new_cities2 <- edited_table_A2_cities %>%
+  # Sort by region, and then by descending population.  
+  arrange(Region, desc(pop_below_3_rise_level)) %>%
+  # Convert Urban_agglomeration to a factor, with the sorted ordering of the levels. 
+  mutate(city = factor(Urban_agglomeration, levels = Urban_agglomeration))
+
+# Let's make region in new_citeis a factor with levels. If you want to edit the order of the facets, you can edit the order of these factors. Detailed process instructions can be found here: https://trinkerrstuff.wordpress.com/2012/10/15/how-do-i-re-arrange-ordering-a-plot/ 
+new_cities2$Region2 <- factor(new_cities2$Region, levels = c("Eastern Asia", "Caribbean", "Central America", "Eastern Africa", "Eastern Europe", "Middle Africa", "Northern Africa", "Northern America", "Northern Europe", "Oceania", "South Africa", "South America", "South-Eastern Asia", "Southern Asia", "Southern Europe", "Western Africa", "Western Asia", "Western Europe"))
+
+p <- ggplot(data = new_cities2,
+            mapping = aes(x = city,
+                          y = pop_below_3_rise_level))
+
+p + geom_bar(stat = "identity") + 
+  facet_wrap(~ Region2, labeller = label_wrap_gen(width = .5), scales="free_x",ncol = 18, strip.position = "bottom") +
+  theme_minimal() +
+  labs(x = "Regions",
+       y = "Pop displaced(?) by 3º Sea Level Rise") +
+  theme(axis.text.x = element_blank())
+```
+Hook the charts together! Version 2 (or 3 or whatever)
+
+```{r}
+library(dplyr)
+
+# Data munging: Let's combine several of the region categories. 
+ new_cities <- edited_table_A2_cities %>%
+  mutate(big_region = recode(edited_table_A2_cities$Region, 
+                             # Asia Group
+                             "Eastern Asia" = "Asia", "South-Eastern Asia" = "Asia", "Southern Asia" = "Asia",
+                             # Africa Group
+                             "Western Africa" = "Africa", "South Africa" = "Africa", "Northern Africa"  = "Africa", "Middle Africa"  = "Africa", "Eastern Africa" = "Africa",
+                             # Europe Group
+                             "Northern Europe" = "Europe", "Western Europe" = "Europe", "Southern Europe" = "Europe", "Eastern Europe" = "Europe",
+                             #South, Central America and Caribbean Group
+                             "Central America" = "Central and South America, Caribbean", "South America"= "Central and South America, Caribbean", "Caribbean"= "Central and South America, Caribbean",
+                             # North America Group
+                             "Northern America" = "North America",
+                             # Middle East Group
+                             "Western Asia" = "Middle East")) %>%
+# First we'll make a new table.
+#new_cities2 <- edited_table_A2_cities %>%
+  # Sort by region, and then by descending population.  
+  arrange(big_region, desc(pop_below_3_rise_level)) %>%
+  # Convert Urban_agglomeration to a factor, with the sorted ordering of the levels. 
+  mutate(city = factor(Urban_agglomeration, levels = Urban_agglomeration))
+
+# Let's make region in new_citeis a factor with levels. If you want to edit the order of the facets, you can edit the order of these factors. Detailed process instructions can be found here: https://trinkerrstuff.wordpress.com/2012/10/15/how-do-i-re-arrange-ordering-a-plot/ 
+new_cities$big_region2 <- factor(new_cities$big_region, levels = c("Asia", "Africa", "Central and South America, Caribbean", "Europe", "Middle East", "North America", "Oceania"))
+
+p <- ggplot(data = new_cities,
+            mapping = aes(x = city,
+                          y = pop_below_3_rise_level))
+
+p + geom_bar(stat = "identity") + 
+  facet_wrap(~ big_region2, labeller = label_wrap_gen(width = .5), scales="free_x",ncol = 18, strip.position = "bottom") +
+  theme_minimal() +
+  labs(x = "Regions",
+       y = "Pop displaced(?) by 3º Sea Level Rise") +
+  theme(axis.text.x = element_blank())
+```
+
+Ideally, I'd like to organize the order of the plots by the number of observations. Let's try and get that to work.
+
+```{r}
+cities_by_big_region <- new_cities %>%
+  group_by(big_region) %>%
+  summarize(N = n()) %>%
+  mutate(freq = N / sum(N),
+         pct = round((freq*100), 1))
+
+p <- ggplot(data = cities_by_big_region, 
+            mapping = aes(x = reorder(big_region, N),
+                          y = N))
+p + geom_bar(stat= "identity") + 
+  coord_flip()+ 
+  labs(title = "Number of Cities in Dataset per region")
+```
+
+I don't think it's gonna be worth doing this programatically. Manual order ensues. 
+
+```{r}
+# Libraries
+library(dplyr)
+library(ggrepel)
+
+# Color Palette: 
+japan.and.world.palette <- c("#e41a1c", "#377eb8")
+
+# Make a new table
+ new_cities <- edited_table_A2_cities %>%
+  #Combine several of the region categories. 
+  mutate(big_region = recode(edited_table_A2_cities$Region, 
+                             # Asia Group
+                             "Eastern Asia" = "Asia", "South-Eastern Asia" = "Asia", "Southern Asia" = "Asia",
+                             # Africa Group
+                             "Western Africa" = "Africa", "South Africa" = "Africa", "Northern Africa"  = "Africa", "Middle Africa"  = "Africa", "Eastern Africa" = "Africa",
+                             # Europe Group
+                             "Northern Europe" = "Europe", "Western Europe" = "Europe", "Southern Europe" = "Europe", "Eastern Europe" = "Europe",
+                             #South, Central America and Caribbean Group
+                             "Central America" = "Central and South America, Caribbean", "South America"= "Central and South America, Caribbean", "Caribbean"= "Central and South America, Caribbean",
+                             # North America Group
+                             "Northern America" = "North America",
+                             # Middle East Group
+                             "Western Asia" = "Middle East")) %>%
+  # Sort by region, and then by descending population.  
+  arrange(big_region, desc(pop_below_3_rise_level)) %>%
+  # Convert Urban_agglomeration to a factor, with the sorted ordering of the levels. 
+  mutate(city = factor(Urban_agglomeration, levels = Urban_agglomeration))
+
+# Let's make region in new_citeis a factor with levels. If you want to edit the order of the facets, you can edit the order of these factors. Detailed process instructions can be found here: https://trinkerrstuff.wordpress.com/2012/10/15/how-do-i-re-arrange-ordering-a-plot/ 
+new_cities$big_region2 <- factor(new_cities$big_region, levels = c("Asia", "Africa", "Central and South America, Caribbean", "Europe", "North America", "Middle East", "Oceania"))
+
+# Basic plot
+p0 <- ggplot(data = new_cities,
+            mapping = aes(x = city,
+                          y = pop_below_3_rise_level))
+
+# Add the bar chart and facets
+p1 <- p0 + geom_bar(stat = "identity") + 
+  facet_wrap(~ big_region2, labeller = label_wrap_gen(width = .5), scales="free_x",ncol = 18, strip.position = "bottom")
+
+# Labeling and theming
+p2 <- p1 +geom_text_repel(data = subset(new_cities, Country %in% "Japan" | pop_below_3_rise_level == max(pop_below_3_rise_level)),
+                  mapping = aes(label = Urban_agglomeration)) +
+  theme_minimal() +
+  labs(x = "Regions",
+       y = "Pop displaced(?) by 3º Sea Level Rise") +
+  theme(axis.text.x = element_blank())
+
+p2
+```
+
+Current goals: coloring japan, labeling Japanese cities and outliers
+
+
+
+Let's try to make a table of just the max values for each group: 
+```{r}
+# Gives you the number
+p <- max(new_cities$pop_below_3_rise_level)
+#gives you the full row. 
+p1 <- subset(new_cities, pop_below_3_rise_level == max(new_cities$pop_below_3_rise_level))
+
+a <-  subset(new_cities, big_region %in% "Asia")
+a2 <- new_cities %>% select(pop_below_3_rise_level) %>% max()
+
+a3 <- subset(new_cities, big_region %in% "Oceania") %>% select(pop_below_3_rise_level) %>% max()
+
+a2
+
+p
+
+a3
+```
+```{r}
+b <- new_cities %>% max(group_by(big_region), pop_below_3_rise_level)
+b
+```
+
+```{r}
+# Libraries
+require(tidyverse)
+require(dplyr)
+require(ggrepel)
+
+# Color Palette: 
+japan.and.world.palette <- c("#377eb8", "#e41a1c")
+
+# Create the data we'll use: 
+# First, let's combine several of the region categories. 
+ new_cities <- edited_table_A2_cities %>%
+  mutate(big_region = recode(edited_table_A2_cities$Region, 
+                             # Asia Group
+                             "Eastern Asia" = "Asia", "South-Eastern Asia" = "Asia", "Southern Asia" = "Asia",
+                             # Africa Group
+                             "Western Africa" = "Africa", "South Africa" = "Africa", "Northern Africa"  = "Africa", "Middle Africa"  = "Africa", "Eastern Africa" = "Africa",
+                             # Europe Group
+                             "Northern Europe" = "Europe", "Western Europe" = "Europe", "Southern Europe" = "Europe", "Eastern Europe" = "Europe",
+                             #South, Central America and Caribbean Group
+                             "Central America" = "Central and South America, Caribbean", "South America"= "Central and South America, Caribbean", "Caribbean"= "Central and South America, Caribbean",
+                             # North America Group
+                             "Northern America" = "North America",
+                             # Middle East Group
+                             "Western Asia" = "Middle East")) %>%
+  # Add a highlight category
+  mutate(is_japan = case_when(Country == "Japan" ~ TRUE,
+                              TRUE ~ FALSE)) %>% 
+  # Sort by region, and then by descending population.  
+  arrange(big_region, desc(pop_below_3_rise_level)) %>%
+  # Convert Urban_agglomeration to a factor, with the sorted ordering of the levels. 
+  mutate(city = factor(Urban_agglomeration, levels = Urban_agglomeration))
+
+# Reorder the facets
+ # Let's make region in new_citeis a factor with levels. If you want to edit the order of the facets, you can edit the order of these factors. Detailed process instructions can be found here: https://trinkerrstuff.wordpress.com/2012/10/15/how-do-i-re-arrange-ordering-a-plot/ 
+new_cities$big_region2 <- factor(new_cities$big_region, levels = c("Asia", "Africa", "Central and South America, Caribbean", "Europe", "North America", "Middle East", "Oceania"))
+
+p0 <- ggplot(data = new_cities,
+            mapping = aes(x = city,
+                          y = pop_below_3_rise_level,
+                          fill = is_japan))
+
+# Make the basic plot
+p1 <- p0 + geom_bar(position = "dodge", stat = "identity", color = "gray80", size = 0.1, width = 1) + 
+  facet_grid(~ big_region2, labeller = label_wrap_gen(width = .5), scales="free_x", space = "free_x", switch = "x")
+
+# Labeling
+p2 <- p1 + geom_text_repel(data = subset(new_cities, Country %in% "Japan" | pop_below_3_rise_level == max(pop_below_3_rise_level)),
+                  mapping = aes(label = Urban_agglomeration), 
+                  direction = "y", 
+                  box.padding = 1, 
+                  force = 2, 
+                  nudge_y = 10000)
+
+# Coloring 
+p3 <- p2 + scale_fill_manual(values = japan.and.world.palette)
+
+# Theming
+p4 <- p3 + theme_minimal() +
+  labs(y = "Population below sea level (thousands)",
+       title = "Asian cities will be disproportionately affected by sea level rise",
+       subtitle = "Cities affected by sea level rise by region",
+       caption = "Source: Climate Central\nBased on 2010 population data") +
+  # Edit the scale for more break points: 
+  theme(axis.text.x = element_blank(),
+        axis.title.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        # Removes the space between the facets
+        panel.spacing.x = unit(0, "native"),
+        plot.caption = element_text(color = "gray30"))+
+  # Removes legend for fill
+  guides(fill = FALSE)
+
+p4
+```
+
+
+# Cities in Japan
+## Cleveland Chart
+```{r}
+p0 <- ggplot(data = subset(new_cities, Country %in% "Japan"),
+             mapping = aes(x = pop_below_3_rise_level,
+                           y = reorder(city, pop_below_3_rise_level)))
+
+p1 <- p0 + geom_point(size = 3)
+
+p2 <- p1 + labs(x = "Population below sea level (thousands)",
+          y = element_blank(),
+          #title = "Japnese Cities Affected by Sea Level Rise",
+          caption = "Source: Climate Central\nBased on 2010 population data") +
+  scale_x_continuous(position = "top")
+p2 + theme_minimal()
+```
+
+## Pointrange
+```{r}
+p0 <- ggplot(data = subset(new_cities, Country %in% "Japan"),
+             mapping = aes(x = reorder(city, pop_below_3_rise_level),
+                           y = pop_below_3_rise_level))
+p1 <- p0 + 
+  geom_pointrange(mapping = aes(ymin = pop_below_2_rise_level,
+                                ymax = pop_below_4_rise_level)) +
+  coord_flip()
+
+p2 <- p1 +
+  labs(y = "Population below sea level (thousands)",
+       x = element_blank(),
+       title = "In Japan, Tokyo, Osaka, and Nagoya will be the worst-affected",
+       subtitle = "Population affected by sea level rise, by city",
+       caption = "Source: Climate Central\nBased on 2010 population data") +
+  scale_y_continuous(position = "top",
+                     breaks = scales::pretty_breaks(n = 6))
+
+p3 <- p2 + theme_minimal() +
+  theme(plot.caption = element_text(color = "gray30"))
+p3
+```
+
+Now let's try to set up some sort of example for the pointrange. 
+
+```{r}
+p0 <- ggplot(data = subset(new_cities, city %in% "Nagoya"),
+             mapping = aes(x = city,
+                           y = pop_below_3_rise_level))
+
+p1 <- p0 + 
+  geom_pointrange(mapping = aes(ymin = pop_below_2_rise_level,
+                                        ymax = pop_below_4_rise_level)) +
+  coord_flip()
+
+p2 <- p1 + labs(x = element_blank(),
+          y = element_blank()) +
+  theme_minimal() +
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.title = element_blank()) +
+  scale_x_discrete(labels = "City")
+p2
+# To save (assumes there is a folder called 'figures' in the working directory)
+ggsave("figures/how-to-read.svg", plot = p2 )
+```
+
+# Info just on Japanese cities: 
+```{r}
+new_cities_japan <- subset(new_cities, Country %in% "Japan") %>%
+  mutate(three.to.four.diff = pop_below_4_rise_level - pop_below_3_rise_level)
+new_cities_japan
+```
+
+# Theme Testing:
+```{r}
+theme_sea <- function(base_size = 11, base_family="") {
+  theme_minimal(base_size = base_size, base_family = base_family) %+replace%
+    theme(axis.title = element_text(face = "bold", size = (base_size*0.8),family = "Helvetica", margin = margin(t = 0, r = 0, b = 0, l = 0, unit = "mm")), 
+          axis.text = element_text(color = "gray60", family = "Courier", margin = margin(t = 0, r = 0, b = 0, l = 0, unit = "lines") ,size = (base_size*0.8)),
+          plot.caption = element_text(color = "gray60",family = "Helvetica", hjust = 1, margin = margin(t = 1, r = 0, b = 0, l = 0, unit = "lines"),size = (base_size*0.8)),
+          plot.margin=grid::unit(c(0,0,0,0), "mm"),
+          plot.title = element_text(face = "bold", family = "Helvetica", hjust = 0, size = (base_size*1.2)),
+          plot.subtitle = element_text(color = "gray60", family = "Helvetica", hjust = 0,  margin = margin(t= 0.5, r = 0, b = 2, l = 0, unit ="lines"))
+          )
+}
+```
+
+Testing
+
+```{r}
+p0 <- ggplot(data = subset(new_cities, Country %in% "Japan"),
+             mapping = aes(x = reorder(city, pop_below_3_rise_level),
+                           y = pop_below_3_rise_level))
+p1 <- p0 + 
+  geom_pointrange(mapping = aes(ymin = pop_below_2_rise_level,
+                                ymax = pop_below_4_rise_level)) +
+  coord_flip()
+
+p2 <- p1 +
+  labs(y = "Population below sea level (thousands)",
+       x = element_blank(),
+       title = "In Japan, Tokyo, Osaka, and Nagoya will be the worst-affected",
+       subtitle = "Population affected by sea level rise, by city",
+       caption = "Source: Climate Central\nBased on 2010 population data") +
+  scale_y_continuous(position = "top",
+                     breaks = scales::pretty_breaks(n = 6))
+
+p3 <- p2 + theme_sea() 
+
+p3
+ggsave("figures/pop-by-city-japanese.svg", plot = p3 )
+```
+
+```{r}
+# Libraries
+require(tidyverse)
+require(dplyr)
+require(ggrepel)
+
+# Color Palette: 
+japan.and.world.palette <- c("#377eb8", "#e41a1c")
+
+# Create the data we'll use: 
+# First, let's combine several of the region categories. 
+ new_cities <- edited_table_A2_cities %>%
+  mutate(big_region = recode(edited_table_A2_cities$Region, 
+                             # Asia Group
+                             "Eastern Asia" = "Asia", "South-Eastern Asia" = "Asia", "Southern Asia" = "Asia",
+                             # Africa Group
+                             "Western Africa" = "Africa", "South Africa" = "Africa", "Northern Africa"  = "Africa", "Middle Africa"  = "Africa", "Eastern Africa" = "Africa",
+                             # Europe Group
+                             "Northern Europe" = "Europe", "Western Europe" = "Europe", "Southern Europe" = "Europe", "Eastern Europe" = "Europe",
+                             #South, Central America and Caribbean Group
+                             "Central America" = "Central and South America, Caribbean", "South America"= "Central and South America, Caribbean", "Caribbean"= "Central and South America, Caribbean",
+                             # North America Group
+                             "Northern America" = "North America",
+                             # Middle East Group
+                             "Western Asia" = "Middle East")) %>%
+  # Add a highlight category
+  mutate(is_japan = case_when(Country == "Japan" ~ TRUE,
+                              TRUE ~ FALSE)) %>% 
+  # Sort by region, and then by descending population.  
+  arrange(big_region, desc(pop_below_3_rise_level)) %>%
+  # Convert Urban_agglomeration to a factor, with the sorted ordering of the levels. 
+  mutate(city = factor(Urban_agglomeration, levels = Urban_agglomeration))
+
+# Reorder the facets
+ # Let's make region in new_citeis a factor with levels. If you want to edit the order of the facets, you can edit the order of these factors. Detailed process instructions can be found here: https://trinkerrstuff.wordpress.com/2012/10/15/how-do-i-re-arrange-ordering-a-plot/ 
+new_cities$big_region2 <- factor(new_cities$big_region, levels = c("Asia", "Africa", "Central and South America, Caribbean", "Europe", "North America", "Middle East", "Oceania"))
+
+p0 <- ggplot(data = new_cities,
+            mapping = aes(x = city,
+                          y = pop_below_3_rise_level,
+                          fill = is_japan))
+
+# Make the basic plot
+p1 <- p0 + geom_bar(position = "dodge", stat = "identity", color = "gray80", size = 0.1, width = 1) + 
+  facet_grid(~ big_region2, labeller = label_wrap_gen(width = .5), scales="free_x", space = "free_x", switch = "x")
+
+# Labeling
+p2 <- p1 + geom_text_repel(data = subset(new_cities, Country %in% "Japan" | pop_below_3_rise_level == max(pop_below_3_rise_level)),
+                  mapping = aes(label = Urban_agglomeration), 
+                  direction = "y", 
+                  box.padding = 1, 
+                  force = 2, 
+                  nudge_y = 10000,
+                  size = 3)
+
+# Coloring 
+p3 <- p2 + scale_fill_manual(values = japan.and.world.palette)
+
+# Theming
+p4 <- p3 + theme_sea() +
+  labs(y = "Population below sea level (thousands)",
+       title = "Asian cities will be disproportionately affected by sea level rise",
+       subtitle = "Cities affected by sea level rise, by region",
+       caption = "Source: Climate Central\nBased on 2010 population data") +
+  # Edit the scale for more break points: 
+  theme(axis.text.x = element_blank(),
+        axis.title.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        plot.margin = margin(t = 0, r = 2, b = 0, l = 0, unit = "cm"),
+        # Removes the space between the facets
+        panel.spacing.x = unit(0, "native"),
+        plot.caption = element_text(color = "gray30"))+
+  # Removes legend for fill
+  guides(fill = FALSE)
+
+p4
+ggsave("figures/pop-by-city-by-region.svg", plot = p4)
+```
+
+```{r}
+p0 <- ggplot(data = subset(new_cities, city %in% "Nagoya"),
+             mapping = aes(x = city,
+                           y = pop_below_3_rise_level))
+
+p1 <- p0 + 
+  geom_pointrange(mapping = aes(ymin = pop_below_2_rise_level,
+                                        ymax = pop_below_4_rise_level)) +
+  coord_flip()
+
+p2 <- p1 + labs(x = element_blank(),
+          y = element_blank()) +
+  theme_sea() +
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.title = element_blank()) +
+  scale_x_discrete(labels = "City name")
+p2
+# To save (assumes there is a folder called 'figures' in the working directory)
+ggsave("figures/how-to-read.svg", plot = p2 )
+```
+
+
 
