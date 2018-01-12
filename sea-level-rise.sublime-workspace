@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"p",
+				"p\tTag"
+			],
+			[
 				"flex",
 				"flex-flow"
 			],
@@ -148,10 +152,6 @@
 				"ol\tTag"
 			],
 			[
-				"p",
-				"p\tTag"
-			],
-			[
 				"hea",
 				"head\t<head>"
 			]
@@ -163,7 +163,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 5347,
+				"buffer_size": 11701,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -386,15 +386,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5347,
+						"buffer_size": 11701,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1445,
-								1445
+								10690,
+								10690
 							]
 						],
 						"settings":
@@ -405,7 +405,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 982.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -424,8 +424,8 @@
 						"selection":
 						[
 							[
-								851,
-								851
+								3,
+								3
 							]
 						],
 						"settings":
@@ -437,10 +437,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 684.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -456,8 +456,8 @@
 						"selection":
 						[
 							[
-								4066,
-								4066
+								654,
+								654
 							]
 						],
 						"settings":
@@ -469,10 +469,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1484.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
