@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"font",
+				"font-family"
+			],
+			[
+				"mar",
+				"margin-bottom"
+			],
+			[
+				"margin-b",
+				"margin-bottom"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"alig",
+				"align-content"
+			],
+			[
+				"ali",
+				"align-content"
+			],
+			[
+				"align",
+				"align-items"
+			],
+			[
 				"p",
 				"p\tTag"
 			],
@@ -48,10 +76,6 @@
 				"sidebar-button"
 			],
 			[
-				"margin",
-				"margin"
-			],
-			[
 				"form",
 				"form\tTag"
 			],
@@ -86,10 +110,6 @@
 			[
 				"padd",
 				"padding"
-			],
-			[
-				"mar",
-				"margin"
 			],
 			[
 				"inline",
@@ -163,7 +183,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 11701,
+				"buffer_size": 12233,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -172,7 +192,7 @@
 			"file": "main.css",
 			"settings":
 			{
-				"buffer_size": 1771,
+				"buffer_size": 2282,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -386,15 +406,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11701,
+						"buffer_size": 12233,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10690,
-								10690
+								7769,
+								7769
 							]
 						],
 						"settings":
@@ -405,7 +425,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 982.0,
+						"translation.y": 2846.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -417,15 +437,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1771,
+						"buffer_size": 2282,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3,
-								3
+								1422,
+								1415
 							]
 						],
 						"settings":
@@ -437,7 +457,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1385.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,

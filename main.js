@@ -29,7 +29,6 @@ $(document).ready(() => {
 
   //This is the variable to change the sealevel. Units are 10ths of a meter. 
   //var seaLevelRise = '0.0';
-
   
   //DELETE
   //debugMe();
@@ -164,9 +163,15 @@ $(document).ready(() => {
     $('.sidebar-button').find('img').toggleClass('rotate');
   });
 
-  // Dropdown behavior
+  // // Dropdown behavior
+  // $('.dropdown-button').on('click', () => {
+  //   $('.dropdown-menu').toggleClass('hidden');
+  //   $(event.currentTarget).find('img').toggleClass('rotate');
+  // });
+
+    // Dropdown behavior 2
   $('.dropdown-button').on('click', () => {
     $('.dropdown-menu').toggleClass('hidden');
-    $(event.currentTarget).find('img').toggleClass('rotate');
+    $(event.currentTarget).toggleClass('rotate');
   });
 });
