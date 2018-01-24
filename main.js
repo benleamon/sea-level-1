@@ -2,10 +2,14 @@ $(document).ready(() => {
   // Initialize the map variable
   var mymap = '';
 
+  var personHeight = 170.7
+
   let seaLevel = {
     _map: '0.0000000000',
     _cm: 0,
     _m: 0,
+    // This is the percent of the figure we want to shade.
+    _percent: "0%",
 
     //Setter for _cm
     set cm(newCm){
@@ -13,6 +17,7 @@ $(document).ready(() => {
       this._cm = newCm;
       this._m = (newCm/100);
       this._map = (newCm/10).toFixed(10);
+      this._percent = `${((100*newCm)/personHeight)}%`
     },
 
     //Getters for all the properties
@@ -25,6 +30,9 @@ $(document).ready(() => {
     get m(){
       return this._m;
     },
+    get percent(){
+      return this._percent
+    },
   };
 
   //This is the variable to change the sealevel. Units are 10ths of a meter. 
@@ -33,13 +41,23 @@ $(document).ready(() => {
   //DELETE
   //debugMe();
 
+    //person-toggle behavior
+  function mapSize(){
+    $('.person').toggleClass('hidden');
+    $('.map').toggleClass('full-width');
+  }
+
   //Function to initialise the map
   function mapinit(){
-      mymap = L.map('mymap',{
+    mymap = L.map('mymap',{
     center: [34.648000, 135.411472],
     zoom: 10.5,
     scrollWheelZoom: false,
     });
+    //The following code makes the buttons visible. If they are not hidden by default, they'll show up at the top of the map before the map loads. 
+    $('.map-menu').toggleClass('hidden');
+    $('.map-search').toggleClass('hidden');
+    $('.person-toggle').toggleClass('hidden');
   };
 
 
@@ -124,18 +142,29 @@ $(document).ready(() => {
   function displayRise(){
     $('#sea-level-display').text(seaLevel.m);
   };
+
+  // Update the shading on the person diagram
+  function personLevel(){
+    $('.person-level').height(`${seaLevel.percent}`);
+  };
+
   //Draw the map
   mapinit();
   drawMap();
+  mapSize();
 
   //Show the rise.
   displayRise();
+
+  //Display shading on the person diagram
+  personLevel();
 
   //Display values in debug section
   function debugMe() {
     $('#dmap').text(`Map Value: ${seaLevel.map}`);
     $('#dcm').text(`CM Value (slider input): ${seaLevel.cm}`);
-    $('#dm').text(`Meter value (display output): ${seaLevel.m}`)
+    $('#dm').text(`Meter value (display output): ${seaLevel.m}`);
+    $('#pct').text(`Percent to shade (from sea level object): ${seaLevel.percent}`);
   };
   debugMe();
   
@@ -151,6 +180,7 @@ $(document).ready(() => {
     displayRise();
     drawMap();
     debugMe();
+    personLevel();
   }); 
 
   // Sidebar behavior
@@ -172,6 +202,13 @@ $(document).ready(() => {
     // Dropdown behavior 2
   $('.dropdown-button').on('click', () => {
     $('.dropdown-menu').toggleClass('hidden');
-    $(event.currentTarget).toggleClass('rotate');
+    $(event.currentTarget).toggleClass('rotate-full');
+  });
+
+
+  // person-toggle button
+  $('.person-toggle').on('click', () => {
+    mapSize();
+    $(event.currentTarget).toggleClass('rotate-full');
   });
 });

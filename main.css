@@ -46,10 +46,6 @@ section{
   margin-bottom: 0rem;
 }
 
-.hidden{
-  display: none;
-}
-
 .container {
   display: flex;
 }
@@ -60,7 +56,6 @@ section{
   background-position: center;
   background-size: cover;
   position: relative;
-  /* background-image: url('images/sea_above.jpg') */
 }
   .background h1{
     position: absolute;
@@ -69,19 +64,60 @@ section{
     color: white;
     font-size: 3rem;
   }
+  nav{
+    position: absolute;
+    bottom: 10px;
+    right: 2rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    color: #FFF;
+  }
+  nav p{
+    margin-left: 2rem;
+  }
+
+
 
 .map {
   height: 45rem;
   background-color: darkgray;
-  width: 75%;
+  width: 85%;
   /* display: block; */
+}
+
+.full-width{
+  width: 100%;
 }
 
 .person {
   height: 45rem;
-  background-color: gray;
-  width: 25%;
+  background-color: lightgray;
+  width: 15%;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  border-left: 1px solid darkgray;
 }
+.person-level{
+  position: absolute;
+  /* z-index: 10000; */
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(40, 77, 255, 0.4);
+  height: 0%;
+  max-height: 45rem;
+/*   overflow: scroll; */
+}
+  .person svg {
+    height: 45rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+    .person svg path {
+      fill: white;
+      stroke: gray;
+    }
 
 .slider {
   margin: .5rem;
@@ -106,10 +142,14 @@ section{
   height: 2rem;
   width: 2rem;
   cursor: pointer;
+
 }
 .dropdown-header{
   display: flex;
 }
+/* .dropdown-menu{
+  color: white;
+} */
 
 .text{
   width: 60%;
@@ -133,26 +173,30 @@ section{
       padding-left: 3px;
     }
 
-.sidebar-button{
+/* .sidebar-button{
   position: fixed;
   z-index: 10001;
   height: 50px;
   width: 50px;
   background-color: lightgrey;
   cursor: pointer;
-}
+} */
 .rotate{
   transition: 0.1s;
   transform: rotate(90deg);
 }
+.rotate-full{
+  transition: 0.1s;
+  transform: rotate(180deg);
+}
 
-.sidebar{
+/* .sidebar{
   position: fixed;
   max-width: 40%;
   height: 100%;
   z-index: 10000;
   background-color: lightgrey;
-  /* How do we get the transition thing working? */
+
   transition: 5s;}
   .sidebar h2{
   margin-right: 2rem;
@@ -171,8 +215,44 @@ section{
 .language-options{
   position: relative;
   left:  6rem;
+} */
+
+.map-button{
+  position: absolute;
+  z-index: 10000;
+  background-color: #fff;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #ccc;
+  border-radius: 2px;
+  display: flex;
+}
+  .map-button img{
+    width: 50%;
+    margin: auto;
+    height: 50%;
+  }
+  .map-button:hover{
+
+  }
+
+.person-toggle{
+  top: 10px;
+  right: 10px;
 }
 
+.map-search{
+  top: 10px;
+  left: 50px;
+  border-bottom: 1px solid #ccc;
+}
+
+.map-menu{
+  top: 43px;
+  left: 50px;
+  border-top: none;
+}
 
 .splash {
   display: flex;
@@ -201,7 +281,10 @@ section{
       display: flex;
     }
   .splash ul{
-    max-height: 10rem;
+    max-height: 20rem;
     overflow: scroll;
+    color: white;
   }
-
+.hidden{
+  display: none;
+}
