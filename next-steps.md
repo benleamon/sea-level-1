@@ -22,3 +22,19 @@ Problem 2 fixed.
 
 ## 11/2 
 Next step is getting the initial screen set up. 
+
+## 1/22
+Next step is to style the hide button on the map in keeping with the exhisting nav buttons, then insert the search buttons and dropdown button on the map. 
+After that look at changing the orientation and size of the dropdown button on the splash screen. 
+# 1/23
+We need to: 
+<!-- - get the person SVG input into the slot -->
+<!-- - doesn't effect fig.2. --> 
+<!-- - resized while preserving the aspect ratio -->
+<!-- - colored the way we want  -->
+- flipped so that it's looking at the map
+- is overlayed with a light blue rectangle svg
+- hooked up to the sea level rise object 
+
+
+OK we've currently got a situation where we need to have a div overlay the SVG-contained overlay. 

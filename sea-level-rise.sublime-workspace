@@ -4,12 +4,68 @@
 		"selected_items":
 		[
 			[
-				"p",
-				"p\tTag"
+				"na",
+				"nav\tTag"
+			],
+			[
+				"backg",
+				"background"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"margin",
+				"margin"
+			],
+			[
+				"img",
+				"img\tTag"
+			],
+			[
+				"map",
+				"mapSize"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"marg",
+				"margin-top"
 			],
 			[
 				"flex",
-				"flex-flow"
+				"flex-direction"
+			],
+			[
+				"fig",
+				"figure"
+			],
+			[
+				"font",
+				"font-family"
+			],
+			[
+				"margin-b",
+				"margin-bottom"
+			],
+			[
+				"alig",
+				"align-content"
+			],
+			[
+				"ali",
+				"align-content"
+			],
+			[
+				"align",
+				"align-items"
+			],
+			[
+				"p",
+				"p\tTag"
 			],
 			[
 				"content",
@@ -18,10 +74,6 @@
 			[
 				"paddi",
 				"padding"
-			],
-			[
-				"back",
-				"background-color"
 			],
 			[
 				"padding",
@@ -48,24 +100,12 @@
 				"sidebar-button"
 			],
 			[
-				"margin",
-				"margin"
-			],
-			[
 				"form",
 				"form\tTag"
 			],
 			[
 				"dark",
 				"darkgray"
-			],
-			[
-				"map",
-				"mapinit"
-			],
-			[
-				"marg",
-				"margin"
 			],
 			[
 				"de",
@@ -86,10 +126,6 @@
 			[
 				"padd",
 				"padding"
-			],
-			[
-				"mar",
-				"margin"
 			],
 			[
 				"inline",
@@ -163,7 +199,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 11701,
+				"buffer_size": 83950,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -172,7 +208,7 @@
 			"file": "main.css",
 			"settings":
 			{
-				"buffer_size": 1771,
+				"buffer_size": 3806,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -181,7 +217,7 @@
 			"file": "main.js",
 			"settings":
 			{
-				"buffer_size": 5171,
+				"buffer_size": 5661,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -190,7 +226,7 @@
 			"file": "next-steps.md",
 			"settings":
 			{
-				"buffer_size": 1422,
+				"buffer_size": 1685,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -338,7 +374,7 @@
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 49.0
 	},
 	"find_in_files":
 	{
@@ -352,6 +388,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"\t ",
+			"width",
+			"rotat",
+			"background",
+			"background title ",
+			"title",
+			"banner",
 			"p{\n  font-family: 'Noto Sans', sans-serif;\n}",
 			"map",
 			"draw_map",
@@ -386,15 +429,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11701,
+						"buffer_size": 83950,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10690,
-								10690
+								1713,
+								1713
 							]
 						],
 						"settings":
@@ -405,7 +448,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 982.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -417,15 +460,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1771,
+						"buffer_size": 3806,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3,
-								3
+								1046,
+								1046
 							]
 						],
 						"settings":
@@ -449,15 +492,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5171,
+						"buffer_size": 5661,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								654,
-								654
+								5501,
+								5501
 							]
 						],
 						"settings":
@@ -469,10 +512,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2088.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -481,15 +524,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1422,
+						"buffer_size": 1685,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1422,
-								1422
+								1521,
+								1521
 							]
 						],
 						"settings":
@@ -501,7 +544,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
