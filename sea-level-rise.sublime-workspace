@@ -4,6 +4,62 @@
 		"selected_items":
 		[
 			[
+				"perso",
+				"personHeight"
+			],
+			[
+				"fle",
+				"flex-start"
+			],
+			[
+				"ali",
+				"align-self"
+			],
+			[
+				"shad",
+				"shadedRems"
+			],
+			[
+				"sh",
+				"shadedRems"
+			],
+			[
+				"pers",
+				"person-level"
+			],
+			[
+				"al",
+				"align-items"
+			],
+			[
+				"to",
+				"toggleClass"
+			],
+			[
+				"person",
+				"person-level"
+			],
+			[
+				"per",
+				"percent"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"_",
+				"_percent"
+			],
+			[
+				"dar",
+				"darkgoldenrod"
+			],
+			[
+				"lightg",
+				"lightgray"
+			],
+			[
 				"na",
 				"nav\tTag"
 			],
@@ -53,10 +109,6 @@
 			],
 			[
 				"alig",
-				"align-content"
-			],
-			[
-				"ali",
 				"align-content"
 			],
 			[
@@ -199,7 +251,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 83950,
+				"buffer_size": 85477,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -208,7 +260,7 @@
 			"file": "main.css",
 			"settings":
 			{
-				"buffer_size": 3806,
+				"buffer_size": 4578,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -217,7 +269,7 @@
 			"file": "main.js",
 			"settings":
 			{
-				"buffer_size": 5661,
+				"buffer_size": 7360,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -226,7 +278,7 @@
 			"file": "next-steps.md",
 			"settings":
 			{
-				"buffer_size": 1685,
+				"buffer_size": 2111,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -388,6 +440,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"child",
+			"person",
+			"relative",
+			"person",
 			"\t ",
 			"width",
 			"rotat",
@@ -420,7 +476,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -429,15 +485,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 83950,
+						"buffer_size": 85477,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1713,
-								1713
+								82874,
+								82898
 							]
 						],
 						"settings":
@@ -448,10 +504,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 17762.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -460,15 +516,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3806,
+						"buffer_size": 4578,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1046,
-								1046
+								3819,
+								3819
 							]
 						],
 						"settings":
@@ -480,10 +536,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 3357.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -492,15 +548,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5661,
+						"buffer_size": 7360,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5501,
-								5501
+								5629,
+								5629
 							]
 						],
 						"settings":
@@ -512,10 +568,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2088.0,
+						"translation.y": 1745.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -524,15 +580,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1685,
+						"buffer_size": 2111,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1521,
-								1521
+								1925,
+								1925
 							]
 						],
 						"settings":
@@ -541,10 +597,10 @@
 							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 142.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
