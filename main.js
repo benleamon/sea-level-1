@@ -8,8 +8,11 @@ $(document).ready(() => {
     _map: '0.0000000000',
     _cm: 0,
     _m: 0,
-    // This is the percent of the figure we want to shade.
+    // This is the percent of the figure we want to shade. Keep either this or the next one. 
     _percent: "0%",
+    //This is the number of rems on the figure we want to shade. 
+    _rawRems: 0,
+    _shadedRems: '0rem',
 
     //Setter for _cm
     set cm(newCm){
@@ -17,7 +20,9 @@ $(document).ready(() => {
       this._cm = newCm;
       this._m = (newCm/100);
       this._map = (newCm/10).toFixed(10);
-      this._percent = `${((100*newCm)/personHeight)}%`
+      this._percent = `${((100*newCm)/personHeight)}%`;
+      this._rawRems = (newCm*(40/personHeight))
+      this._shadedRems = `${(newCm*(40/personHeight))}rem`
     },
 
     //Getters for all the properties
@@ -31,8 +36,14 @@ $(document).ready(() => {
       return this._m;
     },
     get percent(){
-      return this._percent
+      return this._percent;
     },
+    get rawRems(){
+      return this._rawRems;
+    },
+    get shadedRems(){
+      return this._shadedRems;
+    }
   };
 
   //This is the variable to change the sealevel. Units are 10ths of a meter. 
@@ -145,7 +156,18 @@ $(document).ready(() => {
 
   // Update the shading on the person diagram
   function personLevel(){
-    $('.person-level').height(`${seaLevel.percent}`);
+    // Use this if we decide to shade the person by percent, not rems. See line 11. 
+    // $('.person-level').height(`${seaLevel.percent}`);
+    $('.person-level').height(seaLevel.shadedRems);
+    //This will display and set the little baloon saying how many more un-displayed meters there are. 
+    if (seaLevel.rawRems >= 45) {
+      $('.level-balloon').removeClass('hidden');
+      // Update the contents of the balloon: 
+      $('.level-balloon').text(`+ ${((seaLevel.cm-(45*(40/personHeight)))/100).toFixed(2)} meters`);
+    }
+    else {
+      $('.level-balloon').addClass('hidden');
+    }
   };
 
   //Draw the map

@@ -95,22 +95,23 @@ section{
   background-color: lightgray;
   width: 15%;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column-reverse;
   position: relative;
   border-left: 1px solid darkgray;
 }
+.person p:first-child{
+  border-top: 1px solid darkgray;
+}
 .person-level{
   position: absolute;
-  /* z-index: 10000; */
-  bottom: 0;
+/*   bottom: 1.4rem; */
   width: 100%;
   background-color: rgba(40, 77, 255, 0.4);
   height: 0%;
   max-height: 45rem;
-/*   overflow: scroll; */
 }
   .person svg {
-    height: 45rem;
+    height: 40rem;
     margin-left: auto;
     margin-right: auto;
   }
@@ -118,6 +119,19 @@ section{
       fill: white;
       stroke: gray;
     }
+.level-balloon {
+  order: 99;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+  color: white;
+  z-index: 1000;
+  border: 1px solid white;
+  border-radius: 25px;
+  padding: .3rem;
+}
 
 .slider {
   margin: .5rem;
@@ -234,7 +248,7 @@ section{
     height: 50%;
   }
   .map-button:hover{
-
+    background-color: #F2F2F2;
   }
 
 .person-toggle{
@@ -263,7 +277,7 @@ section{
   .splash h2{
     color: white;
   }
-  .splash form, div, ul{
+  .splash form, .splash div, .splash ul{
     margin: auto;
   }
   .splash form{
